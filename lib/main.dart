@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:selaraskan_mobile/auth/login.dart';
+import 'package:selaraskan_mobile/auth/screen/login.dart';
+import 'package:selaraskan_mobile/dashboard_upt/dashboard_upt.dart';
+import 'package:selaraskan_mobile/shared/routes.dart';
 void main ()=> runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
@@ -19,6 +21,10 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: const Login(),
+      routes: {
+        Routes.loginPage : (context) => const Login(),
+        Routes.dashboardUPTPage : (context) => const DashboardUPTPage(),
+      },
     );
   }
 }
