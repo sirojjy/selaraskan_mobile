@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:selaraskan_mobile/auth/screen/login.dart';
 import 'package:selaraskan_mobile/dashboard_upt/dashboard_upt.dart';
+import 'package:selaraskan_mobile/program_modul/daftar_program.dart';
+import 'package:selaraskan_mobile/program_modul/form_daftar_program.dart';
 import 'package:selaraskan_mobile/shared/routes.dart';
 void main ()=> runApp(const MyApp());
 
@@ -24,6 +26,8 @@ class _MyAppState extends State<MyApp> {
       routes: {
         Routes.loginPage : (context) => const Login(),
         Routes.dashboardUPTPage : (context) => const DashboardUPTPage(),
+        Routes.daftarProgram : (context) => const DaftarProgram(),
+        Routes.formDaftarProgram : (context) => const FormDaftarProgram(),
       },
     );
   }
