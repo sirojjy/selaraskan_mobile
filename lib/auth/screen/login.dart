@@ -104,6 +104,7 @@ class _LoginState extends State<Login> {
                   margin:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                   child: SizedBox(
+                    height: 60,
                     width: double.infinity, // Expand horizontally
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
