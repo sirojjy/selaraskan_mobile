@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,6 @@ class _FormDaftarProgramState extends State<FormDaftarProgram> {
   }
 
   ///image
-  File ? _selectedImage;
 
   @override
   Widget build(BuildContext context) {

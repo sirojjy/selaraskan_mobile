@@ -1,13 +1,18 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:gauge_chart/gauge_chart.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:selaraskan_mobile/dashboard_upt/res/custom_appbar.dart';
+import 'package:selaraskan_mobile/dashboard_upt/component/chart_air.dart';
+import 'package:selaraskan_mobile/dashboard_upt/component/chart_listrik.dart';
+import 'package:selaraskan_mobile/dashboard_upt/component/comp_sampah_laut.dart';
 import 'package:selaraskan_mobile/program_modul/daftar_program.dart';
+import 'package:semicircle_indicator/semicircle_indicator.dart';
+
+import 'component/comp_sampah.dart';
+import 'component/comp_sertifikat.dart';
+import 'component/custom_appbar.dart';
+
 
 class DashboardUPTPage extends StatefulWidget {
   const DashboardUPTPage({super.key});
@@ -21,6 +26,7 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
   final GlobalKey<LiquidPullToRefreshState> _refreshIndicatorKey =
   GlobalKey<LiquidPullToRefreshState>();
 
+  ///Pull to refresh start
   static int refreshNum = 10; // number that changes when refreshed
   Stream<int> counterStream =
   Stream<int>.periodic(const Duration(seconds: 3), (x) => refreshNum);
@@ -47,6 +53,7 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
       );
     });
   }
+  ///Pull to refresh end
 
   @override
   Widget build(BuildContext context) {
@@ -54,50 +61,35 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
       child: Scaffold(
         appBar: const CustomAppBar(),
         body: LiquidPullToRefresh(
+          springAnimationDurationInMilliseconds: 100,
           key: _refreshIndicatorKey,
           onRefresh: _handleRefresh,
           showChildOpacityTransition: false,
           child: SingleChildScrollView(
             child: Container(
-              decoration: const BoxDecoration(color: Color(0xff3478df)),
+              decoration: const BoxDecoration(color: Color(0xff1a5ee5)),
               child: Column(
                 children: [
                   const SizedBox(
-                    height: 100,
+                    height: 50,
                   ),
                   Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: GaugeChart(
-                      children: [
-                        PieData(
-                          value: 10,
-                          color: const Color(0xff8cf33b),
-                          description: "Total Score",
-                        ),
-                        PieData(
-                          value: 4,
-                          color: Colors.grey.shade300,
-                          description: "Planned",
-                        ),
-                        // PieData(
-                        //   value: 14,
-                        //   color: Colors.grey.shade300,
-                        //   description: "To plan",
-                        // ),
-                      ],
-                      // gap: 1.8,
-                      animateDuration: const Duration(seconds: 1),
-                      start: 180,
-                      displayIndex: 0,
-                      shouldAnimate: true,
-                      animateFromEnd: false,
-                      isHalfChart: true,
-                      size: 300,
-                      showValue: false,
-                      borderWidth: 25,
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child:
+                    const SemicircularIndicator(
+                      color: Color(0xff00f4ff),
+                      bottomPadding: 0,
+                      child: Text(
+                        '75%',
+                        style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff00f4ff)),
+                      ),
                     ),
                   ),
+                  const SizedBox(height: 30,),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(
@@ -117,13 +109,13 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                           child: Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(32),
+                            margin: const EdgeInsets.only(bottom: 20),
                             decoration: const BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                   colors: [
-                                    Color(0xFF846AFF),
-                                    Color(0xFF755EE8),
+                                    Color(0xff0269fd),
                                     Colors.purpleAccent,
                                     Colors.amber,
                                   ],
@@ -189,23 +181,39 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                             ),
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Image.asset(
-                            'assets/foto/listrik_chart.png',
-                            fit: BoxFit.cover,
-                          ),
+
+                        ///PENGGUNAAN LISTRIK BULANAN
+                        const Column(
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: Text('Penggunaan Listrik Bulanan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
+                            ),
+                            SizedBox(height: 10,),
+                            ChartListrik(),
+                          ],
                         ),
-                        Container(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Image.asset(
-                            'assets/foto/air_dll.png',
-                            fit: BoxFit.cover,
-                          ),
+
+                        ///PENGGUNAAN AIR BULANAN
+                        const SizedBox(height: 15,),
+                        const Column(
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: Text('Penggunaan Air Bulanan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
+                            ),
+                            SizedBox(height: 10,),
+                            ChartAir()
+                          ],
                         ),
-            
+                        const SizedBox(height: 15,),
+                        const ComponentSampah(),
+                        const SizedBox(height: 15,),
+                        const ComponentSampahLaut(),
+                        const SizedBox(height: 15,),
+                        const ComponentSertifikat(),
+
                       ],
-            
                     ),
                   ),
             
@@ -219,3 +227,4 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
     );
   }
 }
+
