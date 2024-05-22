@@ -14,7 +14,8 @@ class BackgroundLogin extends StatelessWidget {
 
     return Container(
       height: size.height,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
+
         image: DecorationImage(
           fit: BoxFit.cover,
           image: AssetImage("assets/bg-selaraskan.jpg")

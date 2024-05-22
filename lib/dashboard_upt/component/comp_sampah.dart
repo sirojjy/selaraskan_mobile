@@ -5,7 +5,11 @@ import 'package:flutter/widgets.dart';
 import '../../shared/color_palete.dart';
 
 class ComponentSampah extends StatelessWidget {
-  const ComponentSampah({super.key});
+  ComponentSampah({super.key, this.sampahDarat, this.sampahDaratOrganik, this.sampahDaratAnorganik, this.sampahDaratDiolah});
+  final String? sampahDarat;
+  final String? sampahDaratOrganik;
+  final String? sampahDaratAnorganik;
+  final String? sampahDaratDiolah;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class ComponentSampah extends StatelessWidget {
                 SizedBox(
                   child: Icon(Icons.delete, color: Colors.white,),
                 ),
-                Text("45.294 Kg", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                Text(sampahDarat ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                 Text("Sampah Darat", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
               ],
             ),
@@ -43,8 +47,8 @@ class ComponentSampah extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Text("45.294 Kg", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Darat", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text(sampahDaratOrganik ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text("Sampah Organik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                   ],
                 ),
               ),
@@ -57,8 +61,8 @@ class ComponentSampah extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Text("45.294 Kg", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Darat", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text(sampahDaratAnorganik ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text("Sampah Anorganik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                   ],
                 ),
               ),
@@ -71,8 +75,8 @@ class ComponentSampah extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Text("45.294 Kg", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Darat", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text(sampahDaratDiolah ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text("Sampah Diolah", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                   ],
                 ),
               ),

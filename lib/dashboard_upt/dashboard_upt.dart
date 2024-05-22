@@ -2,17 +2,19 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:selaraskan_mobile/dashboard_upt/component/chart_air.dart';
 import 'package:selaraskan_mobile/dashboard_upt/component/chart_listrik.dart';
 import 'package:selaraskan_mobile/dashboard_upt/component/comp_sampah_laut.dart';
-import 'package:selaraskan_mobile/program_modul/daftar_program.dart';
+import 'package:selaraskan_mobile/menu_program/daftar_program.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import '../menu/bottom_menu.dart';
+import 'bloc/dashboard_bloc.dart';
 import 'component/comp_sampah.dart';
 import 'component/comp_sertifikat.dart';
-import 'component/custom_appbar.dart';
-
+import 'component/total_program.dart';
 
 class DashboardUPTPage extends StatefulWidget {
   const DashboardUPTPage({super.key});
@@ -24,13 +26,44 @@ class DashboardUPTPage extends StatefulWidget {
 class _DashboardUPTPageState extends State<DashboardUPTPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<LiquidPullToRefreshState> _refreshIndicatorKey =
-  GlobalKey<LiquidPullToRefreshState>();
+      GlobalKey<LiquidPullToRefreshState>();
+  SharedPreferences? pref;
+
+  ///bottom navigation bar
+  late PageController _pageController;
+  int selectedIndex = 0;
+  bool _colorful = false;
+  final List<Widget> _pages = [
+    const DaftarProgram(),
+    const DashboardUPTPage(),
+  ];
+
+  @override
+  void initState() {
+    getPref();
+    super.initState();
+    BlocProvider.of<DashboardBloc>(context).add(const OnDashboardEvent());
+    _pageController = PageController(initialPage: selectedIndex); ///bottom navigation bar
+  }
+
+  ///bottom navigation bar
+  void onButtonPressed(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+    _pageController.animateToPage(selectedIndex,
+        duration: const Duration(milliseconds: 400), curve: Curves.easeOutQuad);
+  }
+
+  void getPref() async {
+    pref = await SharedPreferences.getInstance();
+    setState(() {});
+  }
 
   ///Pull to refresh start
   static int refreshNum = 10; // number that changes when refreshed
   Stream<int> counterStream =
-  Stream<int>.periodic(const Duration(seconds: 3), (x) => refreshNum);
-  
+      Stream<int>.periodic(const Duration(seconds: 3), (x) => refreshNum);
   Future<void> _handleRefresh() {
     final Completer<void> completer = Completer<void>();
     Timer(const Duration(seconds: 3), () {
@@ -53,174 +86,164 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
       );
     });
   }
+
   ///Pull to refresh end
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(),
+        bottomNavigationBar: BottomMenu(),
+
+
+        // appBar: const CustomAppBar(),
         body: LiquidPullToRefresh(
           springAnimationDurationInMilliseconds: 100,
           key: _refreshIndicatorKey,
           onRefresh: _handleRefresh,
           showChildOpacityTransition: false,
           child: SingleChildScrollView(
-            child: Container(
-              decoration: const BoxDecoration(color: Color(0xff1a5ee5)),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child:
-                    const SemicircularIndicator(
-                      color: Color(0xff00f4ff),
-                      bottomPadding: 0,
-                      child: Text(
-                        '75%',
-                        style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xff00f4ff)),
+            child: BlocBuilder<DashboardBloc, DashboardState>(
+                builder: (context, state) {
+              // print('Nama pelabuhan ${state.nama}');
+              return Container(
+                decoration: const BoxDecoration(color: Color(0xff1a5ee5)),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: SemicircularIndicator(
+                        color: const Color(0xff00f4ff),
+                        bottomPadding: 0,
+                        child: Text(
+                          '${state.score?.toStringAsFixed(0)}',
+                          style: const TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff00f4ff)),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 30,),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                        color: Color(0xffffffff),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const DaftarProgram()));
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(32),
-                            margin: const EdgeInsets.only(bottom: 20),
-                            decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color(0xff0269fd),
-                                    Colors.purpleAccent,
-                                    Colors.amber,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                    15))), // Adds a gradient background and rounded corners to the container
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Total Program Lingkungan',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 24
-                                            // fontFamily:
-                                            //     "monospace"
-                                            )),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('25',
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                color: Colors.white)),
-                                        Icon(Icons.forest, color: Colors.white, size: 30,)
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Program Mandatory',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors
-                                                .white)),
-                                    Text('18',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors
-                                                .white))
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Program Voluntary',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors
-                                                .white)),
-                                    Text('7',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors
-                                                .white))
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        ///PENGGUNAAN LISTRIK BULANAN
-                        const Column(
-                          children: [
-                            SizedBox(
-                              height: 40,
-                              child: Text('Penggunaan Listrik Bulanan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
-                            ),
-                            SizedBox(height: 10,),
-                            ChartListrik(),
-                          ],
-                        ),
-
-                        ///PENGGUNAAN AIR BULANAN
-                        const SizedBox(height: 15,),
-                        const Column(
-                          children: [
-                            SizedBox(
-                              height: 40,
-                              child: Text('Penggunaan Air Bulanan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
-                            ),
-                            SizedBox(height: 10,),
-                            ChartAir()
-                          ],
-                        ),
-                        const SizedBox(height: 15,),
-                        const ComponentSampah(),
-                        const SizedBox(height: 15,),
-                        const ComponentSampahLaut(),
-                        const SizedBox(height: 15,),
-                        const ComponentSertifikat(),
-
-                      ],
+                    const SizedBox(
+                      height: 30,
                     ),
-                  ),
-            
-                  ///END Dashboard
-                ],
-              ),
-            ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                          color: Color(0xffffffff),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      child: Column(
+                        children: [
+                          ///TOTAL PROGRAM LINGKUNGAN
+                          TotalProgramLingkungan(
+                            totalProgram: state.totalProgram,
+                            programMandatory: state.jmlProgramMandatori,
+                            programVoluntary: state.jmlProgramVoluntary,
+                          ),
+
+                          ///PENGGUNAAN LISTRIK BULANAN
+                          Column(
+                            children: [
+                               const SizedBox(
+                                height: 40,
+                                child: Text(
+                                  'Penggunaan Listrik Bulanan',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              ChartListrik(
+                                jan: state.listrikJanuari != null ? double.parse(state.listrikJanuari! ) : 0,
+                                feb: state.listrikFebruari != null ? double.parse(state.listrikFebruari! ) : 0,
+                                mar: state.listrikMaret != null ? double.parse(state.listrikMaret! ) : 0,
+                                apr: state.listrikApril != null ? double.parse(state.listrikApril! ) : 0,
+                                mei: state.listrikMei != null ? double.parse(state.listrikMei! ) : 0,
+                                jun: state.listrikJuni != null ? double.parse(state.listrikJuni! ) : 0,
+                                jul: state.listrikJuli != null ? double.parse(state.listrikJuli! ) : 0,
+                                agu: state.listrikAgustus != null ? double.parse(state.listrikAgustus! ) : 0,
+                                sep: state.listrikSeptember != null ? double.parse(state.listrikSeptember! ) : 0,
+                                okt: state.listrikOktober != null ? double.parse(state.listrikOktober! ) : 0,
+                                nov: state.listrikNovember != null ? double.parse(state.listrikNovember! ) : 0,
+                                des: state.listrikDesember != null ? double.parse(state.listrikDesember! ) : 0,
+                              ),
+                            ],
+                          ),
+
+                          ///PENGGUNAAN AIR BULANAN
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 40,
+                                child: Text(
+                                  'Penggunaan Air Bulanan',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              ChartAir(
+                                jan: state.airJanuari != null ? double.parse(state.airJanuari! ) : 0,
+                                feb: state.airFebruari != null ? double.parse(state.airFebruari! ) : 0,
+                                mar: state.airMaret != null ? double.parse(state.airMaret! ) : 0,
+                                apr: state.airApril != null ? double.parse(state.airApril! ) : 0,
+                                mei: state.airMei != null ? double.parse(state.airMei! ) : 0,
+                                jun: state.airJuni != null ? double.parse(state.airJuni! ) : 0,
+                                jul: state.airJuli != null ? double.parse(state.airJuli! ) : 0,
+                                agu: state.airAgustus != null ? double.parse(state.airAgustus! ) : 0,
+                                sep: state.airSeptember != null ? double.parse(state.airSeptember! ) : 0,
+                                okt: state.airOktober != null ? double.parse(state.airOktober! ) : 0,
+                                nov: state.airNovember != null ? double.parse(state.airNovember! ) : 0,
+                                des: state.airDesember != null ? double.parse(state.airDesember! ) : 0,
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          ComponentSampah(
+                            // sampahDarat: NumberFormat.decimalPattern().format(state.sampahDarat),
+                            sampahDarat: '${state.sampahDarat} Kg',
+                            sampahDaratOrganik: '${state.sampahDaratOrganik} Kg',
+                            sampahDaratAnorganik: '${state.sampahDaratAnorganik} Kg',
+                            sampahDaratDiolah: 'null Kg',
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          ComponentSampahLaut(
+                            sampahLaut: '${state.sampahLaut} Kg',
+                            sampahLautOrganik: '${state.sampahLautOrganik} Kg',
+                            sampahLautAnorganik: '${state.sampahLautAnorganik} Kg',
+                            sampahLautDiolah: 'null Kg',
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          const ComponentSertifikat(),
+                        ],
+                      ),
+                    ),
+                    ///END Dashboard
+                  ],
+                ),
+              );
+            }),
           ),
         ),
       ),
