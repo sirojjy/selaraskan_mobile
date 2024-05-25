@@ -29,30 +29,12 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
       GlobalKey<LiquidPullToRefreshState>();
   SharedPreferences? pref;
 
-  ///bottom navigation bar
-  late PageController _pageController;
-  int selectedIndex = 0;
-  bool _colorful = false;
-  final List<Widget> _pages = [
-    const DaftarProgram(),
-    const DashboardUPTPage(),
-  ];
 
   @override
   void initState() {
     getPref();
     super.initState();
     BlocProvider.of<DashboardBloc>(context).add(const OnDashboardEvent());
-    _pageController = PageController(initialPage: selectedIndex); ///bottom navigation bar
-  }
-
-  ///bottom navigation bar
-  void onButtonPressed(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-    _pageController.animateToPage(selectedIndex,
-        duration: const Duration(milliseconds: 400), curve: Curves.easeOutQuad);
   }
 
   void getPref() async {
@@ -86,16 +68,13 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
       );
     });
   }
-
   ///Pull to refresh end
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: BottomMenu(),
-
-
+        bottomNavigationBar: const BottomMenu(),
         // appBar: const CustomAppBar(),
         body: LiquidPullToRefresh(
           springAnimationDurationInMilliseconds: 100,

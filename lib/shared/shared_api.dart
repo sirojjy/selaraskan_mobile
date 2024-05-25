@@ -3,4 +3,5 @@ class ApiConstant {
   static String authentication = '$baseUrl/login';
   static String dashboardKlien = '$baseUrl/dashboard_pelabuhan';
   static String programLingkungan = '$baseUrl/program_lingkungan';
+  static String detailProgram = '$baseUrl/get_evidence_kebersihan';
 }

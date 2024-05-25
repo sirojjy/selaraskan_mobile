@@ -81,7 +81,8 @@ class _DaftarProgramState extends State<DaftarProgram> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DetailProgram()));
+                                builder: (context) =>
+                                const DetailProgram()));
                       },
                       child: Column(
                         children: [
@@ -95,7 +96,7 @@ class _DaftarProgramState extends State<DaftarProgram> {
                                     color: Color(0xfff3478DF),
                                   ),
                                 ),
-                                 SizedBox(
+                                 const SizedBox(
                                   width: 5,
                                 ),
                                 Expanded(
@@ -113,7 +114,7 @@ class _DaftarProgramState extends State<DaftarProgram> {
                             margin: const EdgeInsets.only(bottom: 5),
                             padding: const EdgeInsets.all(5),
                             decoration: const BoxDecoration(
-                              color: Color(0xfff3478DF),
+                              color: Color(0xfff3478df),
                               borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                             child: Row(
@@ -126,8 +127,8 @@ class _DaftarProgramState extends State<DaftarProgram> {
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     Text(
-                                      '${state.dataProgram[index].jenisProgram == '1' ? 'Mandatory' :
-                                      state.dataProgram[index].jenisProgram == '2' ? 'Voluntary' : 'N/A'}',
+                                      state.dataProgram[index].jenisProgram == '1' ? 'Mandatory' :
+                                      state.dataProgram[index].jenisProgram == '2' ? 'Voluntary' : 'N/A',
                                       style: const TextStyle(color: Colors.white),
                                     ),
                                   ],

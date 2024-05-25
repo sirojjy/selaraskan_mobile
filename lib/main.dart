@@ -4,6 +4,8 @@ import 'package:selaraskan_mobile/auth/bloc/auth_bloc.dart';
 import 'package:selaraskan_mobile/auth/screen/login.dart';
 import 'package:selaraskan_mobile/dashboard_upt/bloc/dashboard_bloc.dart';
 import 'package:selaraskan_mobile/dashboard_upt/dashboard_upt.dart';
+import 'package:selaraskan_mobile/menu_detail_program/bloc/detail_program_bloc.dart';
+import 'package:selaraskan_mobile/menu_detail_program/detail_program.dart';
 import 'package:selaraskan_mobile/menu_program/bloc/daftar_program_bloc.dart';
 import 'package:selaraskan_mobile/menu_program/daftar_program.dart';
 import 'package:selaraskan_mobile/menu_program/form_daftar_program.dart';
@@ -17,6 +19,7 @@ void main () async {
           BlocProvider(create: (BuildContext context) => AuthBloc()),
           BlocProvider(create: (BuildContext context) => DashboardBloc()),
           BlocProvider(create: (BuildContext context) => DaftarProgramBloc()),
+          BlocProvider(create: (BuildContext context) => DetailProgramBloc()),
         ], child: const MyApp(),
       )
   );
@@ -43,6 +46,7 @@ class _MyAppState extends State<MyApp> {
         CustomRoutes.loginPage : (context) => const Login(),
         CustomRoutes.dashboardUPTPage : (context) => const DashboardUPTPage(),
         CustomRoutes.daftarProgram : (context) => const DaftarProgram(),
+        CustomRoutes.daftarProgram : (context) => const DetailProgram(),
         CustomRoutes.formDaftarProgram : (context) => const FormDaftarProgram(),
       },
     );
