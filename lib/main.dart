@@ -6,6 +6,7 @@ import 'package:selaraskan_mobile/dashboard_upt/bloc/dashboard_bloc.dart';
 import 'package:selaraskan_mobile/dashboard_upt/dashboard_upt.dart';
 import 'package:selaraskan_mobile/menu_detail_program/bloc/detail_program_bloc.dart';
 import 'package:selaraskan_mobile/menu_detail_program/detail_program.dart';
+import 'package:selaraskan_mobile/menu_detail_program/validate_data_bloc/validate_data_bloc.dart';
 import 'package:selaraskan_mobile/menu_program/bloc/daftar_program_bloc.dart';
 import 'package:selaraskan_mobile/menu_program/daftar_program.dart';
 import 'package:selaraskan_mobile/menu_program/form_daftar_program.dart';
@@ -20,6 +21,7 @@ void main () async {
           BlocProvider(create: (BuildContext context) => DashboardBloc()),
           BlocProvider(create: (BuildContext context) => DaftarProgramBloc()),
           BlocProvider(create: (BuildContext context) => DetailProgramBloc()),
+          BlocProvider(create: (BuildContext context) => ValidateDataBloc())
         ], child: const MyApp(),
       )
   );

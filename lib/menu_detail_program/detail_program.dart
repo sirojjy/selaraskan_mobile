@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:selaraskan_mobile/menu_detail_program/tambah_data.dart';
 
 class DetailProgram extends StatefulWidget {
   const DetailProgram({super.key});
@@ -25,6 +26,14 @@ class _DetailProgramState extends State<DetailProgram> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Detail Program Kebersihan'),
+          actions: [
+            MaterialButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => TambahData()));
+                },
+              child: Text('Tambah Data'),
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Container(
