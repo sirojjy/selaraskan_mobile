@@ -90,8 +90,10 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
+                    Text(state.nama ?? '', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),),
+                    SizedBox(height: 20,),
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(left: 10, right: 10),

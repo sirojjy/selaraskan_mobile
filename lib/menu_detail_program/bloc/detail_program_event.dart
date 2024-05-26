@@ -5,4 +5,10 @@ class DetailProgramEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnDetailProgramView extends DetailProgramEvent {}
+class OnDetailProgramView extends DetailProgramEvent {
+  final String? idDataProgram;
+
+  OnDetailProgramView({
+    this.idDataProgram
+});
+}
