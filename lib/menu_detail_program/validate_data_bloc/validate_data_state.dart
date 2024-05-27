@@ -5,12 +5,16 @@ class ValidateDataState extends Equatable {
   final String? idProgram;
   final XFile? file;
   final XFile? fileSesudah;
+  final String? area;
+  final String? keterangan;
 
   ValidateDataState({
     this.idPelabuhan,
     this.idProgram,
     this.file,
-    this.fileSesudah
+    this.fileSesudah,
+    this.area,
+    this.keterangan
   });
 
   @override
@@ -18,20 +22,26 @@ class ValidateDataState extends Equatable {
     idPelabuhan,
     idProgram,
     file,
-    fileSesudah
+    fileSesudah,
+    area,
+    keterangan
   ];
 
   ValidateDataState copyWith({
     String? idPelabuhan,
     String? idProgram,
     XFile? file,
-    XFile? fileSesudah
+    XFile? fileSesudah,
+    String? area,
+    String? keterangan
   }) {
     return ValidateDataState(
       idPelabuhan: idPelabuhan ?? this.idPelabuhan,
       idProgram: idProgram ?? this.idProgram,
       file: file ?? this.file,
-      fileSesudah: fileSesudah ?? this.fileSesudah
+      fileSesudah: fileSesudah ?? this.fileSesudah,
+      area: area ?? this.area,
+      keterangan: keterangan ?? this.keterangan
     );
   }
 }

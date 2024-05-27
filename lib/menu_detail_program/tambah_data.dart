@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:selaraskan_mobile/menu_detail_program/validate_data_bloc/validate_data_bloc.dart';
+import 'package:selaraskan_mobile/menu_program/model/program_model.dart';
 
 class TambahData extends StatefulWidget {
-  const TambahData({super.key});
+  final ProgramModel data;
+  const TambahData({super.key, required this.data});
 
   @override
   State<TambahData> createState() => _TambahDataState();
@@ -15,6 +17,21 @@ class TambahData extends StatefulWidget {
 class _TambahDataState extends State<TambahData> {
 
   final ImagePicker _picker = ImagePicker();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<ValidateDataBloc>(context).add(SetIdProgram(
+      idProgram: widget.data.idProgram
+    ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,35 +43,21 @@ class _TambahDataState extends State<TambahData> {
               return Column(
                 children: [
                   TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Id Pelabuhan',
-                    ),
-                    onChanged: (value){
-
-                    },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Id Data Program',
-                    ),
-                    onChanged: (value){
-
-                    },
-                  ),
-                  TextFormField(
+                    initialValue: state.area ?? '',
                     decoration: const InputDecoration(
                       labelText: 'Area',
                     ),
                     onChanged: (value){
-
+                      BlocProvider.of<ValidateDataBloc>(context).add(ChangeArea(value: value));
                     },
                   ),
                   TextFormField(
+                    initialValue: state.keterangan ?? '',
                     decoration: const InputDecoration(
                       labelText: 'Keterangan',
                     ),
                     onChanged: (value){
-
+                      BlocProvider.of<ValidateDataBloc>(context).add(ChangeKeterangan(value: value));
                     },
                   ),
                   MaterialButton(
@@ -75,22 +78,6 @@ class _TambahDataState extends State<TambahData> {
                   Visibility(
                       visible: state.fileSesudah != null,
                       child: Image.file(File('${state.fileSesudah?.path}'), height: 100,)),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Tanggal',
-                    ),
-                    onChanged: (value){
-
-                    },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Create Data',
-                    ),
-                    onChanged: (value){
-
-                    },
-                  ),
                   MaterialButton(
                     onPressed: (){
                       BlocProvider.of<ValidateDataBloc>(context).add(SubmitData());

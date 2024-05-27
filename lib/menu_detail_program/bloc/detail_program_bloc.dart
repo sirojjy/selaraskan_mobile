@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:selaraskan_mobile/menu_detail_program/model/detail_program_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../shared/shared_api.dart';
@@ -21,19 +23,28 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
 
     emit(state.copyWith(status: DetailProgramStateStatus.loading));
     try {
+      var url;
       // Memastikan id_pelabuhan dan id_program ada di SharedPreferences
       String? idPelabuhan = prefs.getString('id_pelabuhan');
-      String? idProgram = prefs.getString('id_program');
-      if (idPelabuhan == null || idProgram == null) {
+      if (idPelabuhan == null || event.idProgram == null) {
         throw Exception('id_pelabuhan atau id_program tidak ditemukan di SharedPreferences');
       }
 
-      var url = Uri.parse(ApiConstant.detailProgram);
-      // print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan dan id_program: $idProgram');
+      if(event.idProgram == '2920'){
+        url = Uri.parse(ApiConstant.programKebersihan);
+      }else if(event.idProgram == '2949'){
+        url = Uri.parse(ApiConstant.programSampah);
+      }else {
+        url = Uri.parse(ApiConstant.programKebersihan);
+      }
+
+      print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan dan id_program: ${event.idProgram}');
 
       var response = await http.post(
         url,
-        body: {'id_pelabuhan': idPelabuhan, 'id_data_program': idProgram},
+        body: {
+          'id_data_program': event.idProgram
+        },
       );
 
       // print('Status respons: ${response.statusCode}');
@@ -41,18 +52,30 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
-        var detail = jsonResponse['dataEvidence'][0];
+
+        log('$jsonResponse');
+
+        var listData = <DetailProgramModel>[];
+
+        if(jsonResponse['dataEvidence'] != null){
+          for (var i=0; i<jsonResponse['dataEvidence'].length; i++){
+            listData.add(DetailProgramModel(
+                idPelabuhan: jsonResponse['dataEvidence'][i]['id_pelabuhan'],
+                keterangan: jsonResponse['dataEvidence'][i]['keterangan'],
+                file: jsonResponse['dataEvidence'][i]['file'],
+                tanggal: jsonResponse['dataEvidence'][i]['tanggal'],
+                kawasan: jsonResponse['dataEvidence'][i][''],
+                fileSesudah: jsonResponse['dataEvidence'][i]['file_sesudah'],
+                idProgram: jsonResponse['dataEvidence'][i]['id_data_program'],
+                area: jsonResponse['dataEvidence'][i]['area']
+            ));
+          }
+        }
+
 
         emit(state.copyWith(
           status: DetailProgramStateStatus.success,
-          idPelabuhan: detail['id_pelabuhan'],
-          idProgram: detail['id_program'],
-          idGaleri: detail['id_galeri'],
-          keterangan: detail['keterangan'],
-          tanggal: detail['tanggal'],
-          area: detail['area'],
-          isSuccess: true,
-          message: 'Data loaded successfully',
+          listProgram: listData
         ));
       } else {
         throw Exception('Gagal memuat data: ${response.statusCode}');
@@ -62,7 +85,7 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
       emit(state.copyWith(
           status: DetailProgramStateStatus.error,
           isSuccess: false,
-          message: 'Error loading data'));
+          message: 'Error $error'));
     }
   }
 }

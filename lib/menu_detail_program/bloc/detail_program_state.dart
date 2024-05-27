@@ -19,6 +19,7 @@ class DetailProgramState extends Equatable {
   final String? area;
   final String? message;
   final bool? isSuccess;
+  final List<DetailProgramModel>? listProgram;
 
   DetailProgramState({
     this.idPelabuhan,
@@ -30,6 +31,7 @@ class DetailProgramState extends Equatable {
     required this.status,
     this.message,
     this.isSuccess,
+    this.listProgram
   });
 
   @override
@@ -43,6 +45,7 @@ class DetailProgramState extends Equatable {
     status,
     message,
     isSuccess,
+    listProgram
   ];
 
   DetailProgramState copyWith({
@@ -55,6 +58,7 @@ class DetailProgramState extends Equatable {
     String? area,
     String? message,
     bool? isSuccess,
+    List<DetailProgramModel>? listProgram,
   }) {
     return DetailProgramState(
       idPelabuhan: idPelabuhan ?? this.idPelabuhan,
@@ -66,6 +70,7 @@ class DetailProgramState extends Equatable {
       status: status ?? this.status,
       message: message ?? this.message,
       isSuccess: isSuccess ?? this.isSuccess,
+        listProgram: listProgram ?? this.listProgram
     );
   }
 }

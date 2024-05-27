@@ -81,8 +81,7 @@ class _DaftarProgramState extends State<DaftarProgram> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                const DetailProgram()));
+                                builder: (context) => DetailProgram(data: state.dataProgram[index])));
                       },
                       child: Column(
                         children: [

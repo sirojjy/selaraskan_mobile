@@ -48,7 +48,6 @@ class _MyAppState extends State<MyApp> {
         CustomRoutes.loginPage : (context) => const Login(),
         CustomRoutes.dashboardUPTPage : (context) => const DashboardUPTPage(),
         CustomRoutes.daftarProgram : (context) => const DaftarProgram(),
-        CustomRoutes.daftarProgram : (context) => const DetailProgram(),
         CustomRoutes.formDaftarProgram : (context) => const FormDaftarProgram(),
       },
     );
