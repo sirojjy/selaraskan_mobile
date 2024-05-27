@@ -61,12 +61,15 @@ class ValidateDataBloc extends Bloc<ValidateDataEvent, ValidateDataState> {
         request.files.add(await http.MultipartFile.fromPath('file', file.path));
         request.files.add(await http.MultipartFile.fromPath('file_sesudah', fileSesudah.path));
 
-        request.send().then((response) {
+        await request.send().then((response) {
           print('INI KANN $url ${idPelabuhan} ${state.idProgram} ${state.area} ${state.keterangan} ${DateTime.now()}');
           if (response.statusCode == 200)
             print("Uploaded! ${response.stream}");
-          ValidateDataState();
         });
+
+        emit(state.copyWith(
+            successUpload: true
+        ));
 
       }
     });

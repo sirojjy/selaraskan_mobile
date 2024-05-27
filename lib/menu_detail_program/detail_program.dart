@@ -41,11 +41,12 @@ class _DetailProgramState extends State<DetailProgram> {
           actions: [
             MaterialButton(
                 onPressed: (){
-                  if(widget.data.idProgram == '2920'){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TambahData(data: widget.data)));
-                  }else if(widget.data.idProgram == '2921'){
-                    /// ke form lain
-                  }
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => TambahData(data: widget.data)));
+                  // if(widget.data.idProgram == '2920'){
+                  //
+                  // }else if(widget.data.idProgram == '2921'){
+                  //   /// ke form lain
+                  // }
 
                 },
               child: Text('Tambah Data'),
