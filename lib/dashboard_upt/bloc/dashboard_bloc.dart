@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -10,8 +11,9 @@ part 'dashboard_event.dart';
 part 'dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
-  DashboardBloc() : super(const DashboardState()) {
+  DashboardBloc() : super(DashboardState()) {
     on<OnDashboardEvent>(_validateToDashboard);
+    on<OnDashboardMenuChanged>(_changeIndex);
   }
 
   /// ditkp2022
@@ -113,6 +115,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       print('print error: $error');
       // print('Stack trace: $stackTrace');
     }
+  }
+
+  FutureOr<void> _changeIndex(OnDashboardMenuChanged event, Emitter<DashboardState> emit) {
+    emit(
+      state.copyWith(
+        indexMenu: event.index
+      )
+    );
   }
 }
 

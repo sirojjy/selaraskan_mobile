@@ -72,160 +72,164 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: const BottomMenu(),
-        // appBar: const CustomAppBar(),
-        body: LiquidPullToRefresh(
-          springAnimationDurationInMilliseconds: 100,
-          key: _refreshIndicatorKey,
-          onRefresh: _handleRefresh,
-          showChildOpacityTransition: false,
-          child: SingleChildScrollView(
-            child: BlocBuilder<DashboardBloc, DashboardState>(
-                builder: (context, state) {
-              // print('Nama pelabuhan ${state.nama}');
-              return Container(
-                decoration: const BoxDecoration(color: Color(0xff1a5ee5)),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: SemicircularIndicator(
-                        color: const Color(0xff00f4ff),
-                        bottomPadding: 0,
-                        child: Text(
-                          '${state.score?.toStringAsFixed(0)}',
-                          style: const TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xff00f4ff)),
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      builder: (context, state){
+        return SafeArea(
+          child: Scaffold(
+            bottomNavigationBar: const BottomMenu(),
+            appBar: state.indexMenu == 0 ? null : AppBar(title: const Text('Daftar Program')),
+            backgroundColor: state.indexMenu == 0 ? null : const Color(0xfffe6f2f9),
+            body: LiquidPullToRefresh(
+              springAnimationDurationInMilliseconds: 100,
+              key: _refreshIndicatorKey,
+              onRefresh: _handleRefresh,
+              showChildOpacityTransition: false,
+              child: SingleChildScrollView(
+                child: state.indexMenu == 0 ? Container(
+                  decoration: const BoxDecoration(color: Color(0xff1a5ee5)),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: SemicircularIndicator(
+                          color: const Color(0xff00f4ff),
+                          bottomPadding: 0,
+                          child: Text(
+                            '${state.score?.toStringAsFixed(0)}',
+                            style: const TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xff00f4ff)),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                          color: Color(0xffffffff),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20))),
-                      child: Column(
-                        children: [
-                          ///TOTAL PROGRAM LINGKUNGAN
-                          TotalProgramLingkungan(
-                            totalProgram: state.totalProgram,
-                            programMandatory: state.jmlProgramMandatori,
-                            programVoluntary: state.jmlProgramVoluntary,
-                          ),
-
-                          ///PENGGUNAAN LISTRIK BULANAN
-                          Column(
-                            children: [
-                               const SizedBox(
-                                height: 40,
-                                child: Text(
-                                  'Penggunaan Listrik Bulanan',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              ChartListrik(
-                                jan: state.listrikJanuari != null ? double.parse(state.listrikJanuari! ) : 0,
-                                feb: state.listrikFebruari != null ? double.parse(state.listrikFebruari! ) : 0,
-                                mar: state.listrikMaret != null ? double.parse(state.listrikMaret! ) : 0,
-                                apr: state.listrikApril != null ? double.parse(state.listrikApril! ) : 0,
-                                mei: state.listrikMei != null ? double.parse(state.listrikMei! ) : 0,
-                                jun: state.listrikJuni != null ? double.parse(state.listrikJuni! ) : 0,
-                                jul: state.listrikJuli != null ? double.parse(state.listrikJuli! ) : 0,
-                                agu: state.listrikAgustus != null ? double.parse(state.listrikAgustus! ) : 0,
-                                sep: state.listrikSeptember != null ? double.parse(state.listrikSeptember! ) : 0,
-                                okt: state.listrikOktober != null ? double.parse(state.listrikOktober! ) : 0,
-                                nov: state.listrikNovember != null ? double.parse(state.listrikNovember! ) : 0,
-                                des: state.listrikDesember != null ? double.parse(state.listrikDesember! ) : 0,
-                              ),
-                            ],
-                          ),
-
-                          ///PENGGUNAAN AIR BULANAN
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Column(
-                            children: [
-                              const SizedBox(
-                                height: 40,
-                                child: Text(
-                                  'Penggunaan Air Bulanan',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              ChartAir(
-                                jan: state.airJanuari != null ? double.parse(state.airJanuari! ) : 0,
-                                feb: state.airFebruari != null ? double.parse(state.airFebruari! ) : 0,
-                                mar: state.airMaret != null ? double.parse(state.airMaret! ) : 0,
-                                apr: state.airApril != null ? double.parse(state.airApril! ) : 0,
-                                mei: state.airMei != null ? double.parse(state.airMei! ) : 0,
-                                jun: state.airJuni != null ? double.parse(state.airJuni! ) : 0,
-                                jul: state.airJuli != null ? double.parse(state.airJuli! ) : 0,
-                                agu: state.airAgustus != null ? double.parse(state.airAgustus! ) : 0,
-                                sep: state.airSeptember != null ? double.parse(state.airSeptember! ) : 0,
-                                okt: state.airOktober != null ? double.parse(state.airOktober! ) : 0,
-                                nov: state.airNovember != null ? double.parse(state.airNovember! ) : 0,
-                                des: state.airDesember != null ? double.parse(state.airDesember! ) : 0,
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          ComponentSampah(
-                            // sampahDarat: NumberFormat.decimalPattern().format(state.sampahDarat),
-                            sampahDarat: '${state.sampahDarat} Kg',
-                            sampahDaratOrganik: '${state.sampahDaratOrganik} Kg',
-                            sampahDaratAnorganik: '${state.sampahDaratAnorganik} Kg',
-                            sampahDaratDiolah: 'null Kg',
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          ComponentSampahLaut(
-                            sampahLaut: '${state.sampahLaut} Kg',
-                            sampahLautOrganik: '${state.sampahLautOrganik} Kg',
-                            sampahLautAnorganik: '${state.sampahLautAnorganik} Kg',
-                            sampahLautDiolah: 'null Kg',
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          const ComponentSertifikat(),
-                        ],
+                      const SizedBox(
+                        height: 30,
                       ),
-                    ),
-                    ///END Dashboard
-                  ],
-                ),
-              );
-            }),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: const BoxDecoration(
+                            color: Color(0xffffffff),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20))),
+                        child: Column(
+                          children: [
+                            ///TOTAL PROGRAM LINGKUNGAN
+                            TotalProgramLingkungan(
+                              totalProgram: state.totalProgram,
+                              programMandatory: state.jmlProgramMandatori,
+                              programVoluntary: state.jmlProgramVoluntary,
+                            ),
+
+                            ///PENGGUNAAN LISTRIK BULANAN
+                            Column(
+                              children: [
+                                const SizedBox(
+                                  height: 40,
+                                  child: Text(
+                                    'Penggunaan Listrik Bulanan',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ChartListrik(
+                                  jan: state.listrikJanuari != null ? double.parse(state.listrikJanuari! ) : 0,
+                                  feb: state.listrikFebruari != null ? double.parse(state.listrikFebruari! ) : 0,
+                                  mar: state.listrikMaret != null ? double.parse(state.listrikMaret! ) : 0,
+                                  apr: state.listrikApril != null ? double.parse(state.listrikApril! ) : 0,
+                                  mei: state.listrikMei != null ? double.parse(state.listrikMei! ) : 0,
+                                  jun: state.listrikJuni != null ? double.parse(state.listrikJuni! ) : 0,
+                                  jul: state.listrikJuli != null ? double.parse(state.listrikJuli! ) : 0,
+                                  agu: state.listrikAgustus != null ? double.parse(state.listrikAgustus! ) : 0,
+                                  sep: state.listrikSeptember != null ? double.parse(state.listrikSeptember! ) : 0,
+                                  okt: state.listrikOktober != null ? double.parse(state.listrikOktober! ) : 0,
+                                  nov: state.listrikNovember != null ? double.parse(state.listrikNovember! ) : 0,
+                                  des: state.listrikDesember != null ? double.parse(state.listrikDesember! ) : 0,
+                                ),
+                              ],
+                            ),
+
+                            ///PENGGUNAAN AIR BULANAN
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Column(
+                              children: [
+                                const SizedBox(
+                                  height: 40,
+                                  child: Text(
+                                    'Penggunaan Air Bulanan',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ChartAir(
+                                  jan: state.airJanuari != null ? double.parse(state.airJanuari! ) : 0,
+                                  feb: state.airFebruari != null ? double.parse(state.airFebruari! ) : 0,
+                                  mar: state.airMaret != null ? double.parse(state.airMaret! ) : 0,
+                                  apr: state.airApril != null ? double.parse(state.airApril! ) : 0,
+                                  mei: state.airMei != null ? double.parse(state.airMei! ) : 0,
+                                  jun: state.airJuni != null ? double.parse(state.airJuni! ) : 0,
+                                  jul: state.airJuli != null ? double.parse(state.airJuli! ) : 0,
+                                  agu: state.airAgustus != null ? double.parse(state.airAgustus! ) : 0,
+                                  sep: state.airSeptember != null ? double.parse(state.airSeptember! ) : 0,
+                                  okt: state.airOktober != null ? double.parse(state.airOktober! ) : 0,
+                                  nov: state.airNovember != null ? double.parse(state.airNovember! ) : 0,
+                                  des: state.airDesember != null ? double.parse(state.airDesember! ) : 0,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            ComponentSampah(
+                              // sampahDarat: NumberFormat.decimalPattern().format(state.sampahDarat),
+                              sampahDarat: '${state.sampahDarat} Kg',
+                              sampahDaratOrganik: '${state.sampahDaratOrganik} Kg',
+                              sampahDaratAnorganik: '${state.sampahDaratAnorganik} Kg',
+                              sampahDaratDiolah: 'null Kg',
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            ComponentSampahLaut(
+                              sampahLaut: '${state.sampahLaut} Kg',
+                              sampahLautOrganik: '${state.sampahLautOrganik} Kg',
+                              sampahLautAnorganik: '${state.sampahLautAnorganik} Kg',
+                              sampahLautDiolah: 'null Kg',
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const ComponentSertifikat(),
+                          ],
+                        ),
+                      ),
+                      ///END Dashboard
+                    ],
+                  ),
+                )
+                    : state.indexMenu == 1 ? const DaftarProgram()
+                    : state.indexMenu == 2 ? const DaftarProgram()
+                    : const DaftarProgram(),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

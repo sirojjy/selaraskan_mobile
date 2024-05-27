@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:selaraskan_mobile/dashboard_upt/dashboard_upt.dart';
-import 'package:selaraskan_mobile/menu_program/daftar_program.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:selaraskan_mobile/dashboard_upt/bloc/dashboard_bloc.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class BottomMenu extends StatefulWidget {
@@ -18,31 +18,11 @@ class _BottomMenuState extends State<BottomMenu> {
     return SlidingClippedNavBar.colorful(
       backgroundColor: Colors.white,
       onButtonPressed: (index) {
+        BlocProvider.of<DashboardBloc>(context).add(OnDashboardMenuChanged(index));
+
         setState(() {
           selectedIndex = index;
         });
-        // Handle navigation based on index
-        if (index == 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const DashboardUPTPage()),
-          );
-        } else if (index == 1) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const DaftarProgram()),
-          );
-        } else if (index == 2) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const DaftarProgram()),
-          );
-        } else if (index == 3) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const DaftarProgram()),
-          );
-        }
       },
       iconSize: 30,
       selectedIndex: selectedIndex,

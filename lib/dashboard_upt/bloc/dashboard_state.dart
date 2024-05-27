@@ -43,8 +43,9 @@ class DashboardState extends Equatable {
   final String? airOktober;
   final String? airNovember;
   final String? airDesember;
+  int indexMenu;
 
-  const DashboardState({
+  DashboardState({
     this.status = DashboardStateStatus.initial,
     this.nama,
     this.score,
@@ -85,6 +86,7 @@ class DashboardState extends Equatable {
     this.airOktober,
     this.airNovember,
     this.airDesember,
+    this.indexMenu = 0
   });
 
   DashboardState copyWith({
@@ -128,6 +130,7 @@ class DashboardState extends Equatable {
     String? airOktober,
     String? airNovember,
     String? airDesember,
+    int? indexMenu,
   }) {
     return DashboardState(
       status: status ?? this.status,
@@ -170,6 +173,7 @@ class DashboardState extends Equatable {
       airOktober: airOktober ?? this.airOktober,
       airNovember: airNovember ?? this.airNovember,
       airDesember: airDesember ?? this.airDesember,
+      indexMenu: indexMenu ?? this.indexMenu
     );
   }
 
@@ -215,5 +219,6 @@ class DashboardState extends Equatable {
     airOktober,
     airNovember,
     airDesember,
+    indexMenu
   ];
 }

@@ -10,3 +10,9 @@ abstract class DashboardEvent extends Equatable {
 class OnDashboardEvent extends DashboardEvent {
   const OnDashboardEvent();
 }
+
+class OnDashboardMenuChanged extends DashboardEvent {
+  final int index;
+
+  OnDashboardMenuChanged(this.index);
+}

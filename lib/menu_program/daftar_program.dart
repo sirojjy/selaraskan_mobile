@@ -26,152 +26,150 @@ class _DaftarProgramState extends State<DaftarProgram> {
   }
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Daftar Program')),
-        backgroundColor: const Color(0xfffe6f2f9),
+    return BlocBuilder<DaftarProgramBloc, DaftarProgramState>(
+      builder: (context, state){
+        IconData getIconByProgramId(String idProgram) {
+          switch (idProgram) {
+            case '103':
+              return Icons.abc;
+            case '49':
+              return Icons.add_alert;
+            case '43':
+              return Icons.delete;
+            case '9':
+              return Icons.water;
+            default:
+              return Icons.account_tree;
+          }
+        }
 
-        bottomNavigationBar: BottomMenu(),
-
-        body: BlocBuilder<DaftarProgramBloc, DaftarProgramState>(
-
-          builder: (context, state){
-            IconData getIconByProgramId(String idProgram) {
-              switch (idProgram) {
-                case '103':
-                  return Icons.abc;
-                case '49':
-                  return Icons.add_alert;
-                case '43':
-                  return Icons.delete;
-                case '9':
-                  return Icons.water;
-                default:
-                  return Icons.account_tree;
-              }
-            }
-
-            print('Jumlah Data Program : ${state.dataProgram.length}');
-            return ListView.builder(
-              itemCount: state.dataProgram.length,
-              itemBuilder: (context, index) {
-                String idProgram = '${state.dataProgram[index].idProgram}';
-                IconData iconData = getIconByProgramId(idProgram);
-                // String formattedScore = state.dataProgram[index].score?.toStringAsFixed(1) ?? "0.0";
+        print('Jumlah Data Program : ${state.dataProgram.length}');
+        return ListView.builder(
+          itemCount: state.dataProgram.length,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            String idProgram = '${state.dataProgram[index].idProgram}';
+            IconData iconData = getIconByProgramId(idProgram);
+            // String formattedScore = state.dataProgram[index].score?.toStringAsFixed(1) ?? "0.0";
 
 
-                return ListTile(
-                  title: Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    decoration: BoxDecoration(
-                      color: const Color(0xffffffff),
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset: const Offset(0, 3), // changes position of shadow
+            return ListTile(
+              title: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                decoration: BoxDecoration(
+                  color: const Color(0xffffffff),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailProgram(data: state.dataProgram[index])));
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        padding:  EdgeInsets.only(top: 3, bottom: 3),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              child: Icon(
+                                iconData,
+                                color: Color(0xfff3478DF),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: Text(
+                                '${state.dataProgram[index].namaProgram}',
+                                style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xfff3478DF)),
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailProgram(data: state.dataProgram[index])));
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            padding:  EdgeInsets.only(top: 3, bottom: 3),
-                            child: Row(
-                              children: [
-                                 SizedBox(
-                                  child: Icon(
-                                    iconData,
-                                    color: Color(0xfff3478DF),
-                                  ),
-                                ),
-                                 const SizedBox(
-                                  width: 5,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    '${state.dataProgram[index].namaProgram}',
-                                    style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xfff3478DF)),
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 5),
-                            padding: const EdgeInsets.all(5),
-                            decoration: const BoxDecoration(
-                              color: Color(0xfff3478df),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    const Text(
-                                      'Program',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    Text(
-                                      state.dataProgram[index].jenisProgram == '1' ? 'Mandatory' :
-                                      state.dataProgram[index].jenisProgram == '2' ? 'Voluntary' : 'N/A',
-                                      style: const TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    const Text(
-                                      'Jadwal',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    Text(
-                                      '${state.dataProgram[index].jadwal}',
-                                      style: const TextStyle(color: Colors.white),
-                                    ), // Convert DateTime to string
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    const Text(
-                                      'Score',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    Text(
-                                      '${state.dataProgram[index].score?.toStringAsFixed(1)}',
-                                      style: const TextStyle(color: Colors.white),
-                                    ), // Convert int to string
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        padding: const EdgeInsets.all(5),
+                        decoration: const BoxDecoration(
+                          color: Color(0xfff3478df),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                const Text(
+                                  'Program',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  state.dataProgram[index].jenisProgram == '1' ? 'Mandatory' :
+                                  state.dataProgram[index].jenisProgram == '2' ? 'Voluntary' : 'N/A',
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const Text(
+                                  'Jadwal',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  '${state.dataProgram[index].jadwal}',
+                                  style: const TextStyle(color: Colors.white),
+                                ), // Convert DateTime to string
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const Text(
+                                  'Score',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  '${state.dataProgram[index].score?.toStringAsFixed(1)}',
+                                  style: const TextStyle(color: Colors.white),
+                                ), // Convert int to string
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-
+                ),
+              ),
             );
           },
 
-        ),
-      ),
+        );
+      },
+
     );
+    //   Scaffold(
+    //   appBar: AppBar(title: const Text('Daftar Program')),
+    //   backgroundColor: const Color(0xfffe6f2f9),
+    //
+    //   body: ,
+    // );
   }
 
 
