@@ -23,8 +23,8 @@ class _TambahDataState extends State<TambahData> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<ValidateDataBloc>(context).add(SetIdProgram(
-      idProgram: widget.data.idProgram
+    BlocProvider.of<ValidateDataBloc>(context).add(SetIdDataProgram(
+      idDataProgram: widget.data.idProgram
     ));
   }
 
@@ -44,7 +44,7 @@ class _TambahDataState extends State<TambahData> {
         listener: (context, state){
           if(state.successUpload){
             Navigator.pop(context);
-            BlocProvider.of<DetailProgramBloc>(context).add(OnDetailProgramView(idProgram: widget.data.idProgram));
+            BlocProvider.of<DetailProgramBloc>(context).add(OnDetailProgramView(idDataProgram: widget.data.idProgram));
           }
         },
         child: Container(

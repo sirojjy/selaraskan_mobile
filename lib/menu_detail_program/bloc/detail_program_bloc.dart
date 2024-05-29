@@ -26,24 +26,24 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
       var url;
       // Memastikan id_pelabuhan dan id_program ada di SharedPreferences
       String? idPelabuhan = prefs.getString('id_pelabuhan');
-      if (idPelabuhan == null || event.idProgram == null) {
+      if (idPelabuhan == null || event.idDataProgram == null) {
         throw Exception('id_pelabuhan atau id_program tidak ditemukan di SharedPreferences');
       }
 
-      if(event.idProgram == '2920'){
+      if(event.idDataProgram == '4'){ ///program kebersihan
         url = Uri.parse(ApiConstant.programKebersihan);
-      }else if(event.idProgram == '2949'){
+      }else if(event.idDataProgram == '2949'){
         url = Uri.parse(ApiConstant.programSampah);
       }else {
         url = Uri.parse(ApiConstant.programKebersihan);
       }
 
-      print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan dan id_program: ${event.idProgram}');
+      print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan dan id_data_program: ${event.idDataProgram}');
 
       var response = await http.post(
         url,
         body: {
-          'id_data_program': event.idProgram
+          'id_data_program': event.idDataProgram
         },
       );
 

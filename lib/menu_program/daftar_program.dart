@@ -75,7 +75,9 @@ class _DaftarProgramState extends State<DaftarProgram> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DetailProgram(data: state.dataProgram[index])));
+
+                          ///KIRIM ID DATA PROGRAM
+                          builder: (context) => DetailProgram(data: state.dataProgram[index])));
                   },
                   child: Column(
                     children: [

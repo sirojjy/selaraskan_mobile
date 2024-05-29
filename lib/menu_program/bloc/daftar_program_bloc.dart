@@ -28,7 +28,7 @@ class DaftarProgramBloc extends Bloc<DaftarProgramEvent, DaftarProgramState> {
         throw Exception('id_pelabuhan tidak ditemukan di SharedPreferences');
       }
 
-      var url = Uri.parse(ApiConstant.programLingkungan);
+      var url = Uri.parse(ApiConstant.allProgram);
       // print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan');
 
       var response = await http.post(
@@ -44,7 +44,8 @@ class DaftarProgramBloc extends Bloc<DaftarProgramEvent, DaftarProgramState> {
         var progLingkungan = jsonResponse['progLingkungan'];
         for (var item in progLingkungan) {
           dataProgram.add(ProgramModel(
-            idProgram: item['id_data_program'],
+            idProgram: item['id_program'],
+            idDataProgram: item['id_data_program'],
             namaProgram: item['program'],
             jenisProgram: item['kategori_program'],
             jadwal: item['periode'],

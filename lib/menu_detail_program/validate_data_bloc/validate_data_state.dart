@@ -3,6 +3,7 @@ part of 'validate_data_bloc.dart';
 class ValidateDataState extends Equatable {
   final String? idPelabuhan;
   final String? idProgram;
+  final String? idDataProgram;
   final XFile? file;
   final XFile? fileSesudah;
   final String? area;
@@ -12,6 +13,7 @@ class ValidateDataState extends Equatable {
   ValidateDataState({
     this.idPelabuhan,
     this.idProgram,
+    this.idDataProgram,
     this.file,
     this.fileSesudah,
     this.area,
@@ -23,6 +25,7 @@ class ValidateDataState extends Equatable {
   List<Object?> get props => [
     idPelabuhan,
     idProgram,
+    idDataProgram,
     file,
     fileSesudah,
     area,
@@ -33,6 +36,7 @@ class ValidateDataState extends Equatable {
   ValidateDataState copyWith({
     String? idPelabuhan,
     String? idProgram,
+    String? idDataProgram,
     XFile? file,
     XFile? fileSesudah,
     String? area,
@@ -41,7 +45,8 @@ class ValidateDataState extends Equatable {
   }) {
     return ValidateDataState(
       idPelabuhan: idPelabuhan ?? this.idPelabuhan,
-      idProgram: idProgram ?? this.idProgram,
+        idProgram: idProgram ?? this.idProgram,
+      idDataProgram: idProgram ?? this.idDataProgram,
       file: file ?? this.file,
       fileSesudah: fileSesudah ?? this.fileSesudah,
       area: area ?? this.area,
