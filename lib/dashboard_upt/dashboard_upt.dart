@@ -92,10 +92,16 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                       const SizedBox(
                         height: 50,
                       ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+
                       Container(
                         alignment: Alignment.center,
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: SemicircularIndicator(
+                          progress: 0.3,
+                          // progress: (state.score) / 100,
                           color: const Color(0xff00f4ff),
                           bottomPadding: 0,
                           child: Text(
@@ -200,7 +206,7 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                               sampahDarat: '${state.sampahDarat} Kg',
                               sampahDaratOrganik: '${state.sampahDaratOrganik} Kg',
                               sampahDaratAnorganik: '${state.sampahDaratAnorganik} Kg',
-                              sampahDaratDiolah: 'null Kg',
+                              sampahDaratDiolah: '0 Kg',
                             ),
                             const SizedBox(
                               height: 15,
@@ -209,7 +215,7 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                               sampahLaut: '${state.sampahLaut} Kg',
                               sampahLautOrganik: '${state.sampahLautOrganik} Kg',
                               sampahLautAnorganik: '${state.sampahLautAnorganik} Kg',
-                              sampahLautDiolah: 'null Kg',
+                              sampahLautDiolah: '0 Kg',
                             ),
                             const SizedBox(
                               height: 15,

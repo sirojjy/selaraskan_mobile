@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -39,17 +40,22 @@ class _DetailProgramState extends State<DetailProgram> {
         appBar: AppBar(
           title: Text('Detail Program Kebersihan'),
           actions: [
-            MaterialButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => TambahData(data: widget.data)));
-                  // if(widget.data.idProgram == '2920'){
-                  //
-                  // }else if(widget.data.idProgram == '2921'){
-                  //   /// ke form lain
-                  // }
+            Container(
+              padding: EdgeInsets.only(right: 10),
+              child: MaterialButton(
+                color: Color(0xff1a5ee5),
+                  textColor: Colors.white,
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TambahData(data: widget.data)));
+                    // if(widget.data.idProgram == '2920'){
+                    //
+                    // }else if(widget.data.idProgram == '2921'){
+                    //   /// ke form lain
+                    // }
 
-                },
-              child: Text('Tambah Data'),
+                  },
+                child: Text('+ Tambah Data'),
+              ),
             )
           ],
         ),
@@ -169,12 +175,13 @@ class _DetailProgramState extends State<DetailProgram> {
                                     // );
                                   },
                                 ),
+                                subtitle: Text('${data.keterangan}'),
                                 title: GestureDetector(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Evidence ${data.keterangan}',
+                                        'Evidence ${data.tanggal}',
                                         style: const TextStyle(fontWeight: FontWeight.w500),
                                       ),
 
