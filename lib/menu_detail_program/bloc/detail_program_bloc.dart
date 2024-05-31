@@ -24,27 +24,29 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
     emit(state.copyWith(status: DetailProgramStateStatus.loading));
     try {
       var url;
-      // Memastikan id_pelabuhan dan id_program ada di SharedPreferences
+      // Memastikan id_pelabuhan ada di SharedPreferences
       String? idPelabuhan = prefs.getString('id_pelabuhan');
+
       if (idPelabuhan == null || event.idDataProgram == null) {
-        throw Exception('id_pelabuhan atau id_program tidak ditemukan di SharedPreferences');
+        throw Exception(
+            'id_pelabuhan atau id_program tidak ditemukan di SharedPreferences');
       }
 
-      if(event.idDataProgram == '4'){ ///program kebersihan
+      if (event.idProgram == '4') {
+        ///program kebersihan
         url = Uri.parse(ApiConstant.programKebersihan);
-      }else if(event.idDataProgram == '2949'){
+      } else if (event.idProgram == '2949') {
         url = Uri.parse(ApiConstant.programSampah);
-      }else {
+      } else {
         url = Uri.parse(ApiConstant.programKebersihan);
       }
 
-      print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan dan id_data_program: ${event.idDataProgram}');
+      print(
+          'Mengirim permintaan ke URL: $url id_pelabuhan: $idPelabuhan id_data_program: ${event.idDataProgram} id program: ${event.idProgram}');
 
       var response = await http.post(
         url,
-        body: {
-          'id_data_program': event.idDataProgram
-        },
+        body: {'id_data_program': event.idDataProgram},
       );
 
       // print('Status respons: ${response.statusCode}');
@@ -57,8 +59,8 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
 
         var listData = <DetailProgramModel>[];
 
-        if(jsonResponse['dataEvidence'] != null){
-          for (var i=0; i<jsonResponse['dataEvidence'].length; i++){
+        if (jsonResponse['dataEvidence'] != null) {
+          for (var i = 0; i < jsonResponse['dataEvidence'].length; i++) {
             listData.add(DetailProgramModel(
                 idPelabuhan: jsonResponse['dataEvidence'][i]['id_pelabuhan'],
                 keterangan: jsonResponse['dataEvidence'][i]['keterangan'],
@@ -66,17 +68,14 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
                 tanggal: jsonResponse['dataEvidence'][i]['tanggal'],
                 kawasan: jsonResponse['dataEvidence'][i][''],
                 fileSesudah: jsonResponse['dataEvidence'][i]['file_sesudah'],
-                idProgram: jsonResponse['dataEvidence'][i]['id_data_program'],
-                area: jsonResponse['dataEvidence'][i]['area']
-            ));
+                idProgram: jsonResponse['dataEvidence'][i]['id_program'],
+                idDataProgram: jsonResponse['dataEvidence'][i]['id_data_program'],
+                area: jsonResponse['dataEvidence'][i]['area']));
           }
         }
 
-
         emit(state.copyWith(
-          status: DetailProgramStateStatus.success,
-          listProgram: listData
-        ));
+            status: DetailProgramStateStatus.success, listProgram: listData));
       } else {
         throw Exception('Gagal memuat data: ${response.statusCode}');
       }

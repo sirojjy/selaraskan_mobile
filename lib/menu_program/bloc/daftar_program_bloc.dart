@@ -51,7 +51,9 @@ class DaftarProgramBloc extends Bloc<DaftarProgramEvent, DaftarProgramState> {
             jadwal: item['periode'],
             score: double.tryParse(item['skor']),
           ));
+
         }
+
         emit(state.copyWith(
             status: DaftarProgramStateStatus.success,
             dataProgram: dataProgram));
@@ -63,5 +65,6 @@ class DaftarProgramBloc extends Bloc<DaftarProgramEvent, DaftarProgramState> {
       emit(state.copyWith(
           status: DaftarProgramStateStatus.error, dataProgram: dataProgram));
     }
+
   }
 }

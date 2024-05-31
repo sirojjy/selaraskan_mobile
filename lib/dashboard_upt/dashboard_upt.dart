@@ -67,13 +67,13 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
       );
     });
   }
-
   ///Pull to refresh end
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
+        print('Id pelabuhan : ${pref?.getString('id_pelabuhan')}');
         return SafeArea(
           child: Scaffold(
             bottomNavigationBar: const BottomMenu(),
@@ -95,7 +95,7 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                         child: Column(
                           children: [
                             const SizedBox(
-                              height: 30,
+                              height: 15,
                             ),
                             Text(
                               state.nama ?? '',
@@ -107,18 +107,18 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                             const SizedBox(
                               height: 20,
                             ),
-
                             Container(
                               alignment: Alignment.center,
                               padding:
                                   const EdgeInsets.only(left: 10, right: 10),
                               child: SemicircularIndicator(
-                                progress: 0.3,
+                                progress: (double.tryParse(state.score ?? '0'))! / 100,
                                 // progress: (state.score) / 100,
                                 color: const Color(0xff00f4ff),
                                 bottomPadding: 0,
                                 child: Text(
-                                  '${state.score?.toStringAsFixed(0)}',
+                                  // '${state.score?.toStringAsFixed(0)}',
+                                  '${state.score}',
                                   style: const TextStyle(
                                       fontSize: 32,
                                       fontWeight: FontWeight.w600,

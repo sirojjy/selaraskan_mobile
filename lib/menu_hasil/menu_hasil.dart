@@ -30,48 +30,14 @@ class _DaftarProgramState extends State<DaftarProgram> {
       builder: (context, state){
         IconData getIconByProgramId(String idProgram) {
           switch (idProgram) {
-            case '4':
-              return Icons.energy_savings_leaf;
-            case '5':
-              return Icons.track_changes;
-            case '7':
-              return Icons.safety_check;
-            case '8':
-              return Icons.water_rounded;
-            case '9':
-              return Icons.track_changes_outlined;
-            case '10':
-              return Icons.water;
-            case '11':
-              return Icons.circle_outlined;
-            case '15':
-              return Icons.forest;
-            case '43':
-              return Icons.light;
-            case '47':
-              return Icons.air;
-            case '48':
-              return Icons.water;
+            case '103':
+              return Icons.abc;
             case '49':
-              return Icons.dangerous;
-            case '51':
-              return Icons.restore_from_trash;
-            case '52':
-              return Icons.restore_from_trash_outlined;
-            case '53':
-              return Icons.delete_sweep;
-            case '54':
-              return Icons.cleaning_services;
-            case '58':
-              return Icons.water_drop;
-            case '60':
-              return Icons.person_4;
-            case '64':
-              return Icons.checklist_rtl;
-            case '99':
-              return Icons.recycling;
-            case '100':
-              return Icons.landscape;
+              return Icons.add_alert;
+            case '43':
+              return Icons.delete;
+            case '9':
+              return Icons.water;
             default:
               return Icons.account_tree;
           }
@@ -111,7 +77,7 @@ class _DaftarProgramState extends State<DaftarProgram> {
                         MaterialPageRoute(
 
                           ///KIRIM ID DATA PROGRAM
-                          builder: (context) => DetailProgram(data: state.dataProgram[index])));
+                            builder: (context) => DetailProgram(data: state.dataProgram[index])));
                   },
                   child: Column(
                     children: [
@@ -231,106 +197,106 @@ class _DaftarProgramState extends State<DaftarProgram> {
     '17': Icons.account_tree,
     '18': Icons.file_open,
   };
-  //
-  // // Assuming all lists have the same length
-  // List<String> icons = [
-  //   '1',
-  //   '2',
-  //   '3',
-  //   '4',
-  //   '5',
-  //   '6',
-  //   '7',
-  //   '8',
-  //   '9',
-  //   '10',
-  //   '11',
-  //   '12',
-  //   '13',
-  //   '14',
-  //   '15',
-  //   '16',
-  //   '17',
-  //   '18',
-  // ];
-  // List<String> namaProgram = [
-  //   'Kebersihan Pelabuhan',
-  //   'Pengukuran Volumen Sampah Darat',
-  //   'Pengukuran Volumen Sampah Laut',
-  //   'Pemilahan Sampah',
-  //   'Pengelolaan Sampah',
-  //   'Pengukuran Kualitas Udara',
-  //   'RTH',
-  //   'Pengukuran Kualitas Air Kolam',
-  //   'Pengukuran Air Limbah',
-  //   'Penggunaan Lampu Hemat Energi',
-  //   'Himbauan Hemat Energi',
-  //   'Patroli Energi',
-  //   'Himbauan Hemat Air',
-  //   'Patroli Air',
-  //   'Drone',
-  //   'Penampungan Limbah B3',
-  //   'Kepatuhan Tenan',
-  //   'Pelaksanaan Sertifikasi & Surveillance',
-  // ];
-  // List<String> jenisProgram = [
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  //   'Mandatory',
-  // ];
-  // List<String> jadwal = [
-  //   'Harian',
-  //   'Harian',
-  //   'Harian',
-  //   'Harian',
-  //   'Mingguan',
-  //   'Bulanan',
-  //   'Mingguan',
-  //   'Bulanan',
-  //   'Bulanan',
-  //   'Bulanan',
-  //   'Mingguan',
-  //   'Harian',
-  //   'Mingguan',
-  //   'Harian',
-  //   'Bulanan',
-  //   'Bulanan',
-  //   'Bulanan',
-  //   'Bulanan',
-  // ];
-  // List<int> jumlahEvidence = [
-  //   1,
-  //   2,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  //   3,
-  // ];
+//
+// // Assuming all lists have the same length
+// List<String> icons = [
+//   '1',
+//   '2',
+//   '3',
+//   '4',
+//   '5',
+//   '6',
+//   '7',
+//   '8',
+//   '9',
+//   '10',
+//   '11',
+//   '12',
+//   '13',
+//   '14',
+//   '15',
+//   '16',
+//   '17',
+//   '18',
+// ];
+// List<String> namaProgram = [
+//   'Kebersihan Pelabuhan',
+//   'Pengukuran Volumen Sampah Darat',
+//   'Pengukuran Volumen Sampah Laut',
+//   'Pemilahan Sampah',
+//   'Pengelolaan Sampah',
+//   'Pengukuran Kualitas Udara',
+//   'RTH',
+//   'Pengukuran Kualitas Air Kolam',
+//   'Pengukuran Air Limbah',
+//   'Penggunaan Lampu Hemat Energi',
+//   'Himbauan Hemat Energi',
+//   'Patroli Energi',
+//   'Himbauan Hemat Air',
+//   'Patroli Air',
+//   'Drone',
+//   'Penampungan Limbah B3',
+//   'Kepatuhan Tenan',
+//   'Pelaksanaan Sertifikasi & Surveillance',
+// ];
+// List<String> jenisProgram = [
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+//   'Mandatory',
+// ];
+// List<String> jadwal = [
+//   'Harian',
+//   'Harian',
+//   'Harian',
+//   'Harian',
+//   'Mingguan',
+//   'Bulanan',
+//   'Mingguan',
+//   'Bulanan',
+//   'Bulanan',
+//   'Bulanan',
+//   'Mingguan',
+//   'Harian',
+//   'Mingguan',
+//   'Harian',
+//   'Bulanan',
+//   'Bulanan',
+//   'Bulanan',
+//   'Bulanan',
+// ];
+// List<int> jumlahEvidence = [
+//   1,
+//   2,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+//   3,
+// ];
 }

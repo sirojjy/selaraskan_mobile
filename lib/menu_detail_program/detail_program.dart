@@ -7,6 +7,7 @@ import 'package:selaraskan_mobile/menu_program/model/program_model.dart';
 
 class DetailProgram extends StatefulWidget {
   final ProgramModel data;
+
   const DetailProgram({super.key, required this.data});
 
   @override

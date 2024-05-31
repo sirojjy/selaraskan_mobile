@@ -2,6 +2,7 @@ class ApiConstant {
   static String baseUrl = 'http://123.100.226.123:2904/api';
   static String authentication = '$baseUrl/login';
   static String dashboardKlien = '$baseUrl/dashboard_pelabuhan';
+  static String dashboardUPT = '$baseUrl/dashboard_per_pelabuhan';
 
   ///DETAIL PROGRAM
   static String allProgram = '$baseUrl/program_lingkungan';
