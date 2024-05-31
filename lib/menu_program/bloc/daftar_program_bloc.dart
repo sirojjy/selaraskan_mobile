@@ -41,14 +41,17 @@ class DaftarProgramBloc extends Bloc<DaftarProgramEvent, DaftarProgramState> {
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
+
+        print('INI DATABYA : ${jsonResponse}');
         var progLingkungan = jsonResponse['progLingkungan'];
         for (var item in progLingkungan) {
           dataProgram.add(ProgramModel(
-            idProgram: item['id_data_program'],
+            idProgram: item['id_program'],
             namaProgram: item['program'],
             jenisProgram: item['kategori_program'],
             jadwal: item['periode'],
             score: double.tryParse(item['skor']),
+            idDataProgram: item['id_data_program']
           ));
         }
         emit(state.copyWith(

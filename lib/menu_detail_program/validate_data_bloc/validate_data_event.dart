@@ -19,8 +19,9 @@ class SubmitData extends ValidateDataEvent {}
 
 class SetIdProgram extends ValidateDataEvent {
   final String? idProgram;
+  final String? idDataProgram;
 
-  SetIdProgram({this.idProgram});
+  SetIdProgram({this.idProgram, this.idDataProgram});
 }
 
 class ChangeArea extends ValidateDataEvent {

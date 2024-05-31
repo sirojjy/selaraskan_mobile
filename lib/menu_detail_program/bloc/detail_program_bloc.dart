@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:selaraskan_mobile/menu_detail_program/model/detail_program_model.dart';
+import 'package:selaraskan_mobile/menu_program/model/program_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../shared/shared_api.dart';
@@ -26,24 +27,24 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
       var url;
       // Memastikan id_pelabuhan dan id_program ada di SharedPreferences
       String? idPelabuhan = prefs.getString('id_pelabuhan');
-      if (idPelabuhan == null || event.idProgram == null) {
-        throw Exception('id_pelabuhan atau id_program tidak ditemukan di SharedPreferences');
-      }
+      // if (idPelabuhan == null || event.idProgram == null) {
+      //   throw Exception('id_pelabuhan atau id_program tidak ditemukan di SharedPreferences');
+      // }
 
-      if(event.idProgram == '2920'){
+      if(event.data?.idProgram == '54'){
         url = Uri.parse(ApiConstant.programKebersihan);
-      }else if(event.idProgram == '2949'){
+      }else if(event.data?.idProgram == '99'){
         url = Uri.parse(ApiConstant.programSampah);
       }else {
         url = Uri.parse(ApiConstant.programKebersihan);
       }
 
-      print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan dan id_program: ${event.idProgram}');
+      print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan dan id_program: ${event.data?.idProgram}');
 
       var response = await http.post(
         url,
         body: {
-          'id_data_program': event.idProgram
+          'id_data_program': event.data?.idDataProgram
         },
       );
 

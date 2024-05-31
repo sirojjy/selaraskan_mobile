@@ -8,4 +8,5 @@ class ApiConstant {
   static String programKualitasAir = '$baseUrl/get_evidence_kualitasAir';
   static String programKebersihan = '$baseUrl/get_evidence_kebersihan';
   static String addProgramKebersihan = '$baseUrl/add_evidence_kebersihan';
+  static String addSampahDarat = '$baseUrl/add_evidence_sampah_darat';
 }

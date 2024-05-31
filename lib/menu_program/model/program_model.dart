@@ -8,6 +8,7 @@ class ProgramModel {
   final String? jenisProgram;
   final String? jadwal;
   final double? score;
+  final String? idDataProgram;
 
   ProgramModel(
       {this.idProgram,
@@ -15,5 +16,6 @@ class ProgramModel {
       this.namaProgram,
       this.jenisProgram,
       this.jadwal,
-      this.score});
+      this.score,
+      this.idDataProgram});
 }

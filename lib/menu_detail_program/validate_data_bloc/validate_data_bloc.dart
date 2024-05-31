@@ -49,17 +49,32 @@ class ValidateDataBloc extends Bloc<ValidateDataEvent, ValidateDataState> {
         final fileSesudah = File('${state.fileSesudah?.path}');
         /// tinggal hit a[pi upload, caranya sama kayak yg upload file dari gallery
 
-        var url = Uri.parse(ApiConstant.addProgramKebersihan);
+        var url;
+        // = Uri.parse(ApiConstant.addProgramKebersihan);
+
+        if(state.idProgram == '54'){
+          url = Uri.parse(ApiConstant.addProgramKebersihan);
+        }else if(state.idProgram == '99'){
+          url = Uri.parse(ApiConstant.addSampahDarat);
+        }else {
+          url = Uri.parse(ApiConstant.addProgramKebersihan);
+        }
 
         var request = http.MultipartRequest("POST", url);
-        request.fields['id_pelabuhan'] = '$idPelabuhan';
-        request.fields['id_data_program'] = '${state.idProgram}';
-        request.fields['area'] = '${state.area}';
-        request.fields['keterangan'] = '${state.keterangan}';
-        request.fields['tanggal'] = '${DateTime.now()}';
 
-        request.files.add(await http.MultipartFile.fromPath('file', file.path));
-        request.files.add(await http.MultipartFile.fromPath('file_sesudah', fileSesudah.path));
+        /// GAWER KONDISI MENEH NENG KNE
+        if(state.idProgram == '54'){
+          request.fields['id_pelabuhan'] = '$idPelabuhan';
+          request.fields['id_data_program'] = '${state.idDataProgram}';
+          request.fields['area'] = '${state.area}';
+          request.fields['keterangan'] = '${state.keterangan}';
+          request.fields['tanggal'] = '${DateTime.now()}';
+
+          request.files.add(await http.MultipartFile.fromPath('file', file.path));
+          request.files.add(await http.MultipartFile.fromPath('file_sesudah', fileSesudah.path));
+        }else if(state.idProgram == '99'){
+
+        }
 
         await request.send().then((response) {
           print('INI KANN $url ${idPelabuhan} ${state.idProgram} ${state.area} ${state.keterangan} ${DateTime.now()}');
