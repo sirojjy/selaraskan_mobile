@@ -46,7 +46,7 @@ class _BottomMenuState extends State<BottomMenu> {
           inactiveColor: Colors.grey[600],
         ),
         BarItem(
-          icon: Icons.filter,
+          icon: Icons.person,
           title: 'Galeri',
           activeColor: Colors.blue,
           inactiveColor: Colors.grey[600],

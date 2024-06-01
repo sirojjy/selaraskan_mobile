@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import '../../shared/color_palete.dart';
 
 class ComponentSampah extends StatelessWidget {
-  ComponentSampah({super.key, this.sampahDarat, this.sampahDaratOrganik, this.sampahDaratAnorganik, this.sampahDaratDiolah});
+  const ComponentSampah({super.key, this.sampahDarat, this.sampahDaratOrganik, this.sampahDaratAnorganik, this.sampahDaratDiolah});
   final String? sampahDarat;
   final String? sampahDaratOrganik;
   final String? sampahDaratAnorganik;
@@ -18,68 +18,68 @@ class ComponentSampah extends StatelessWidget {
         Expanded(
           child: Container(
 
-            padding: EdgeInsets.only(top: 40, bottom: 40),
+            padding: const EdgeInsets.only(top: 15, bottom: 15),
             decoration: BoxDecoration(
               color: ColorPalete.primaryColor,
-              borderRadius: BorderRadius.all(Radius.circular(10))
+              borderRadius: const BorderRadius.all(Radius.circular(10))
             ),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   child: Icon(Icons.delete, color: Colors.white,),
                 ),
-                Text(sampahDarat ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                Text("Sampah Darat", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                Text(sampahDarat ?? '', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                const Text("Sampah Darat", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
               ],
             ),
           ),
         ),
-        SizedBox(height: 5,width: 5,),
+        const SizedBox(height: 5,width: 5,),
         Expanded(
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 5),
+                margin: const EdgeInsets.only(bottom: 5),
                 width:double.infinity,
                 decoration: BoxDecoration(
                     color: ColorPalete.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
+                    borderRadius: const BorderRadius.all(Radius.circular(10))
                 ),
                 child: Column(
                   children: [
-                    Text(sampahDaratOrganik ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Organik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text(sampahDaratOrganik ?? '', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    const Text("Sampah Organik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                   ],
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 5),
+                margin: const EdgeInsets.only(bottom: 5),
                 width:double.infinity,
                 decoration: BoxDecoration(
                     color: ColorPalete.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
+                    borderRadius: const BorderRadius.all(Radius.circular(10))
                 ),
                 child: Column(
                   children: [
-                    Text(sampahDaratAnorganik ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Anorganik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text(sampahDaratAnorganik ?? '', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    const Text("Sampah Anorganik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(bottom: 5),
-                width:double.infinity,
-                decoration: BoxDecoration(
-                    color: ColorPalete.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
-                ),
-                child: Column(
-                  children: [
-                    Text(sampahDaratDiolah ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Diolah", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.only(bottom: 5),
+              //   width:double.infinity,
+              //   decoration: BoxDecoration(
+              //       color: ColorPalete.primaryColor,
+              //       borderRadius: const BorderRadius.all(Radius.circular(10))
+              //   ),
+              //   child: Column(
+              //     children: [
+              //       Text(sampahDaratDiolah ?? '', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+              //       const Text("Sampah Diolah", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         )

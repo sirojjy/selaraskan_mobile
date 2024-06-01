@@ -18,65 +18,65 @@ class ComponentSampahLaut extends StatelessWidget {
         Expanded(
           child: Container(
 
-            padding: EdgeInsets.only(top: 40, bottom: 40),
+            padding: const EdgeInsets.only(top: 40, bottom: 40),
             decoration: BoxDecoration(
               color: ColorPalete.primaryColor,
-              borderRadius: BorderRadius.all(Radius.circular(10))
+              borderRadius: const BorderRadius.all(Radius.circular(10))
             ),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   child: Icon(Icons.delete, color: Colors.white,),
                 ),
-                Text(sampahLaut ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                Text("Sampah Darat", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                Text(sampahLaut ?? '', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                const Text("Sampah Darat", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
               ],
             ),
           ),
         ),
-        SizedBox(height: 5,width: 5,),
+        const SizedBox(height: 5,width: 5,),
         Expanded(
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 5),
+                margin: const EdgeInsets.only(bottom: 5),
                 width:double.infinity,
                 decoration: BoxDecoration(
                     color: ColorPalete.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
+                    borderRadius: const BorderRadius.all(Radius.circular(10))
                 ),
                 child: Column(
                   children: [
-                    Text(sampahLautOrganik ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Organik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text(sampahLautOrganik ?? '', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    const Text("Sampah Organik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                   ],
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 5),
+                margin: const EdgeInsets.only(bottom: 5),
                 width:double.infinity,
                 decoration: BoxDecoration(
                     color: ColorPalete.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
+                    borderRadius: const BorderRadius.all(Radius.circular(10))
                 ),
                 child: Column(
                   children: [
-                    Text(sampahLautAnorganik ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Anorganik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text(sampahLautAnorganik ?? '', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    const Text("Sampah Anorganik", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                   ],
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 5),
+                margin: const EdgeInsets.only(bottom: 5),
                 width:double.infinity,
                 decoration: BoxDecoration(
                     color: ColorPalete.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))
+                    borderRadius: const BorderRadius.all(Radius.circular(10))
                 ),
                 child: Column(
                   children: [
-                    Text(sampahLautDiolah ?? '', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
-                    Text("Sampah Diolah", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    Text(sampahLautDiolah ?? '', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    const Text("Sampah Diolah", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
                   ],
                 ),
               ),

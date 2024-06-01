@@ -7,6 +7,7 @@ import 'package:selaraskan_mobile/menu_program/model/program_model.dart';
 
 class DetailProgram extends StatefulWidget {
   final ProgramModel data;
+
   const DetailProgram({super.key, required this.data});
 
   @override
@@ -21,8 +22,8 @@ class _DetailProgramState extends State<DetailProgram> {
 
   /// Method to handle photo selection
   // void _selectPhoto(bool isBefore) {
-    /// Code to select photo from device's gallery
-    /// and save its path to _fotoSebelumPath or _fotoSesudahPath based on isBefore value
+  /// Code to select photo from device's gallery
+  /// and save its path to _fotoSebelumPath or _fotoSesudahPath based on isBefore value
   // }
 
   @override
@@ -30,6 +31,7 @@ class _DetailProgramState extends State<DetailProgram> {
     super.initState();
 
     BlocProvider.of<DetailProgramBloc>(context).add(OnDetailProgramView(data: widget.data));
+
   }
 
   @override
@@ -37,19 +39,26 @@ class _DetailProgramState extends State<DetailProgram> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Detail Program Kebersihan'),
+          title: const Text('Detail Program Kebersihan'),
           actions: [
-            MaterialButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => TambahData(data: widget.data)));
+            Container(
+              padding: const EdgeInsets.only(right: 10),
+              child: MaterialButton(
+                color: const Color(0xff1a5ee5),
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TambahData(data: widget.data)));
                   // if(widget.data.idProgram == '2920'){
                   //
                   // }else if(widget.data.idProgram == '2921'){
                   //   /// ke form lain
                   // }
-
                 },
-              child: Text('Tambah Data'),
+                child: const Text('+ Tambah Data'),
+              ),
             )
           ],
         ),
@@ -57,131 +66,38 @@ class _DetailProgramState extends State<DetailProgram> {
           child: Container(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: BlocBuilder<DetailProgramBloc, DetailProgramState>(
-              builder: (context, state){
-                if(state.status == DetailProgramStateStatus.error){
+              builder: (context, state) {
+                if (state.status == DetailProgramStateStatus.error) {
                   return Text('${state.message}');
-                } else if(state.status == DetailProgramStateStatus.loading){
+                } else if (state.status == DetailProgramStateStatus.loading) {
                   return const CircularProgressIndicator();
-                } else{
-                  if(state.listProgram != null){
+                } else {
+                  if (state.listProgram != null) {
                     return Column(
                       children: [
-                        for(var data in state.listProgram!)
+                        for (var data in state.listProgram!)
                           Card(
                             child: ListTile(
                                 leading: GestureDetector(
-                                  child: Icon(Icons.image, color: Color(0xfff3478DF),),
-                                  onTap: () {
-                                    // showModalBottomSheet<void>(
-                                    //   context: context,
-                                    //   builder: (BuildContext context) {
-                                    //     return SizedBox(
-                                    //       // height: 200,
-                                    //       child: Container(
-                                    //         padding: const EdgeInsets.all(15),
-                                    //         child: Column(
-                                    //           mainAxisAlignment: MainAxisAlignment.center,
-                                    //           mainAxisSize: MainAxisSize.min,
-                                    //           children: <Widget>[
-                                    //             const Text('Tambah Data'),
-                                    //
-                                    //             // Upload Foto Sebelum
-                                    //             const Text('Upload Foto Sebelum'),
-                                    //             const SizedBox(
-                                    //               height: 20,
-                                    //             ),
-                                    //             // _selectedImage != null ? Image.file(_selectedImage!) : Text('Please Select Image'),
-                                    //             Row(
-                                    //               mainAxisAlignment: MainAxisAlignment.center,
-                                    //               children: [
-                                    //                 ElevatedButton(
-                                    //                     onPressed: () {
-                                    //                       _pickImageFromGalery();
-                                    //                     },
-                                    //                     child: const Text('Galeri')),
-                                    //                 const SizedBox(
-                                    //                   width: 10,
-                                    //                 ),
-                                    //                 ElevatedButton(
-                                    //                   onPressed: () => {},
-                                    //                   child: const Text('Kamera'),
-                                    //                 ),
-                                    //               ],
-                                    //             ),
-                                    //
-                                    //             // Upload Foto Sesudah
-                                    //             const Text('Upload Foto Sesudah'),
-                                    //             ElevatedButton(
-                                    //               onPressed: () => _selectPhoto(false),
-                                    //               child: const Text('Pilih Foto Sesudah'),
-                                    //             ),
-                                    //             _fotoSesudahPath.isNotEmpty
-                                    //                 ? Image.asset(
-                                    //                 _fotoSesudahPath) // Preview Foto Sesudah
-                                    //                 : const SizedBox(),
-                                    //
-                                    //             // Nama Petugas
-                                    //             TextField(
-                                    //               controller: _namaPetugasController,
-                                    //               decoration: const InputDecoration(
-                                    //                   labelText: 'Nama Petugas'),
-                                    //             ),
-                                    //
-                                    //             // Jabatan
-                                    //             TextField(
-                                    //               controller: _jabatanController,
-                                    //               decoration: const InputDecoration(
-                                    //                   labelText: 'Jabatan'),
-                                    //             ),
-                                    //
-                                    //             Row(
-                                    //                 mainAxisAlignment: MainAxisAlignment.center,
-                                    //                 children: [
-                                    //                   Padding(
-                                    //                     padding: const EdgeInsets.all(8.0),
-                                    //                     child: ElevatedButton(
-                                    //                       style: ElevatedButton.styleFrom(
-                                    //                           backgroundColor:
-                                    //                           const Color(0xff007BFF)),
-                                    //                       child: const Text(
-                                    //                         'Upload',
-                                    //                         style:
-                                    //                         TextStyle(color: Colors.white),
-                                    //                       ),
-                                    //                       onPressed: () =>
-                                    //                           Navigator.pop(context),
-                                    //                     ),
-                                    //                   ),
-                                    //                   Padding(
-                                    //                     padding: const EdgeInsets.all(8.0),
-                                    //                     child: ElevatedButton(
-                                    //                       child: const Text('Cancel'),
-                                    //                       onPressed: () =>
-                                    //                           Navigator.pop(context),
-                                    //                     ),
-                                    //                   ),
-                                    //                 ]),
-                                    //           ],
-                                    //         ),
-                                    //       ),
-                                    //     );
-                                    //   },
-                                    // );
-                                  },
+                                  child: const Icon(
+                                    Icons.image,
+                                    color: Color(0xfff3478df),
+                                  ),
+                                  onTap: () {},
                                 ),
+                                subtitle: Text('${data.keterangan}'),
                                 title: GestureDetector(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Evidence ${data.keterangan}',
-                                        style: const TextStyle(fontWeight: FontWeight.w500),
+                                        'Evidence ${data.tanggal}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w500),
                                       ),
 
-                                      // Text(
-                                      //   '${state.data[index].jenisDok}',
-                                      //   style: const TextStyle(fontSize: 14),
-                                      // ),
+                                      // Text('${state.data[index].jenisDok}', style: const TextStyle(fontSize: 14),),
                                     ],
                                   ),
                                   onTap: () {
@@ -189,14 +105,15 @@ class _DetailProgramState extends State<DetailProgram> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => Dialog(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(20)),
-                                              child: SizedBox(
-                                                height: 50,
-                                                child: Text('${data.file}'),
-                                              ),
-                                            )));
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                  child: SizedBox(
+                                                    height: 50,
+                                                    child: Text('${data.file}'),
+                                                  ),
+                                                )));
                                   },
                                 ),
                                 // subtitle: Text('${state.data[index].jenisDok}'),
@@ -211,15 +128,13 @@ class _DetailProgramState extends State<DetailProgram> {
                                       onPressed: () {},
                                     ),
                                   ],
-                                )
-                            ),
+                                )),
                           ),
                       ],
                     );
-                  }else{
+                  } else {
                     return const Text('Data Kosong');
                   }
-
                 }
               },
             ),
@@ -227,14 +142,5 @@ class _DetailProgramState extends State<DetailProgram> {
         ),
       ),
     );
-  }
-
-  Future _pickImageFromGalery() async {
-    final returnedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      // _selectedImage = File(returnedImage!.path);
-    });
   }
 }

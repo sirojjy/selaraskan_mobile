@@ -15,39 +15,29 @@ part 'validate_data_state.dart';
 class ValidateDataBloc extends Bloc<ValidateDataEvent, ValidateDataState> {
   ValidateDataBloc() : super(ValidateDataState()) {
     on<ValidateDataEvent>((event, emit) async {
-      if(event is ChangeImageFile){
-        emit(state.copyWith(
-          file: event.filePickData
-        ));
-      }else if(event is ChangeImageFileSesudah){
-        emit(state.copyWith(
-            fileSesudah: event.filePickData
-        ));
-      }else if(event is SetIdProgram){
-        emit(state.copyWith(
-            idProgram: event.idProgram
-        ));
-      } else if(event is ChangeArea){
-        emit(state.copyWith(
-            area: event.value
-        ));
-      } else if(event is ChangeKeterangan){
-        emit(state.copyWith(
-            keterangan: event.value
-        ));
-      } else if(event is SubmitData){
+      if (event is ChangeImageFile) {
+        emit(state.copyWith(file: event.filePickData));
+      } else if (event is ChangeImageFileSesudah) {
+        emit(state.copyWith(fileSesudah: event.filePickData));
+      } else if (event is SetIdDataProgram) {
+        emit(state.copyWith(idProgram: event.idDataProgram));
+      } else if (event is ChangeArea) {
+        emit(state.copyWith(area: event.value));
+      } else if (event is ChangeKeterangan) {
+        emit(state.copyWith(keterangan: event.value));
+      } else if (event is SubmitData) {
         /// kerjain submit datanya di sini
         /// kalau yg mau di lempar harus file ubah dulu xfile jadi file
         /// cartanya gini File(state.file.path)
         ///
-
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final idPelabuhan = prefs.getString('id_pelabuhan');
 
         final file = File('${state.file?.path}');
         final fileSesudah = File('${state.fileSesudah?.path}');
-        /// tinggal hit a[pi upload, caranya sama kayak yg upload file dari gallery
+
+        /// tinggal hit api upload, caranya sama kayak yg upload file dari gallery
 
         var url;
         // = Uri.parse(ApiConstant.addProgramKebersihan);
@@ -76,16 +66,14 @@ class ValidateDataBloc extends Bloc<ValidateDataEvent, ValidateDataState> {
 
         }
 
+
         await request.send().then((response) {
-          print('INI KANN $url ${idPelabuhan} ${state.idProgram} ${state.area} ${state.keterangan} ${DateTime.now()}');
-          if (response.statusCode == 200)
-            print("Uploaded! ${response.stream}");
+          print(
+              'INI KANN $url ${idPelabuhan} ${state.idDataProgram} ${state.area} ${state.keterangan} ${DateTime.now()}');
+          if (response.statusCode == 200) print("Uploaded! ${response.stream}");
         });
 
-        emit(state.copyWith(
-            successUpload: true
-        ));
-
+        emit(state.copyWith(successUpload: true));
       }
     });
   }

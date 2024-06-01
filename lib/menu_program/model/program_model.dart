@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class ProgramModel {
   final String? idProgram;
+  final String? idDataProgram;
   final Icon? iconMap;
   final String? namaProgram;
   final String? jenisProgram;
@@ -12,6 +13,7 @@ class ProgramModel {
 
   ProgramModel(
       {this.idProgram,
+      this.idDataProgram,
       this.iconMap,
       this.namaProgram,
       this.jenisProgram,

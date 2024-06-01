@@ -22,7 +22,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     emit(state.copyWith(status: DashboardStateStatus.loading));
-
     // try {
     //   var url = Uri.parse('http://123.100.226.123:2904/Api/dashboard_pelabuhan/1');
     //   var response = await http.post(url, body: {
@@ -51,13 +50,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     // }
 
     try {
-      var url = Uri.parse(ApiConstant.dashboardKlien);
+      var url = Uri.parse(ApiConstant.dashboardUPT);
       // var url = Uri.parse('http://123.100.226.123:2904/Api/dashboard_pelabuhan');
       var request = await http.post(url, body: {
         'id_pelabuhan': prefs.getString('id_pelabuhan'),
 
       });
-      // print('Dashboard bloc id pelabuhan : ${prefs.getString('id_pelabuhan')}');
 
       var response = jsonDecode(request.body);
       // print('Dashboard bloc print nama klien ${response['nama']}');
@@ -74,41 +72,43 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           totalProgram: response['jumlah_program'],
           programSelesai: response['program_selesai'],
           programBelum: response['program_belum'],
-          jmlProgramMandatori: response['jml_program_mandatori'],
-          jmlProgramVoluntary: response['jml_program_voluntary'],
+          jmlProgramMandatori: response['jumlah_program_m'],
+          jmlProgramVoluntary: response['jumlah_program_v'],
           linkLokasi: response['link_lokasi'],
+          totalSampah: response['total_sampah'],
           sampahDarat: response['sampah_darat'],
           sampahDaratOrganik: response['sampah_darat_organik'],
           sampahDaratAnorganik: response['sampah_darat_anorganik'],
           sampahLaut: response['sampah_laut'],
           sampahLautOrganik: response['sampah_laut_organik'],
           sampahLautAnorganik: response['sampah_laut_anorganik'],
-          listrikJanuari: response['listrik_jan'],
-          listrikFebruari: response['listrik_feb'],
-          listrikMaret: response['listrik_mar'],
-          listrikApril: response['listrik_apr'],
-          listrikMei: response['listrik_mei'],
-          listrikJuni: response['listrik_jun'],
-          listrikJuli: response['listrik_jul'],
-          listrikAgustus: response['listrik_agu'],
-          listrikSeptember: response['listrik_sep'],
-          listrikOktober: response['listrik_okt'],
-          listrikNovember: response['listrik_nov'],
-          listrikDesember: response['listrik_des'],
-          airJanuari: response['air_jan'],
-          airFebruari: response['air_feb'],
-          airMaret: response['air_mar'],
-          airApril: response['air_apr'],
-          airMei: response['air_mei'],
-          airJuni: response['air_jun'],
-          airJuli: response['air_jul'],
-          airAgustus: response['air_agu'],
-          airSeptember: response['air_sep'],
-          airOktober: response['air_okt'],
-          airNovember: response['air_nov'],
-          airDesember: response['air_des'],
-
+          sampahDiolah: response['sampah_olah'],
+          listrikJanuari: response['l_jan'],
+          listrikFebruari: response['l_feb'],
+          listrikMaret: response['l_mar'],
+          listrikApril: response['l_apr'],
+          listrikMei: response['l_mei'],
+          listrikJuni: response['l_jun'],
+          listrikJuli: response['l_jul'],
+          listrikAgustus: response['l_agu'],
+          listrikSeptember: response['l_sep'],
+          listrikOktober: response['l_okt'],
+          listrikNovember: response['l_nov'],
+          listrikDesember: response['l_des'],
+          airJanuari: response['a_jan'],
+          airFebruari: response['a_feb'],
+          airMaret: response['a_mar'],
+          airApril: response['a_apr'],
+          airMei: response['a_mei'],
+          airJuni: response['a_jun'],
+          airJuli: response['a_jul'],
+          airAgustus: response['a_agu'],
+          airSeptember: response['a_sep'],
+          airOktober: response['a_okt'],
+          airNovember: response['a_nov'],
+          airDesember: response['a_des'],
         ));
+        print('CEK DATA DASHBOARD: ${state.score}');
       }
     } catch (error, stackTrace) {
       emit(state.copyWith(status: DashboardStateStatus.error));

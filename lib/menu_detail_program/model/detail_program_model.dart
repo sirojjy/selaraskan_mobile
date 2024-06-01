@@ -9,6 +9,7 @@ class DetailProgramModel {
   Null? idKebersihan;
   String? fileSesudah;
   String? idProgram;
+  String? idDataProgram;
   String? area;
 
   DetailProgramModel({this.idGaleri,
@@ -21,6 +22,7 @@ class DetailProgramModel {
     this.idKebersihan,
     this.fileSesudah,
     this.idProgram,
+    this.idDataProgram,
     this.area});
 
 }
