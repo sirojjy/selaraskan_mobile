@@ -30,8 +30,8 @@ class _DetailProgramState extends State<DetailProgram> {
   void initState() {
     super.initState();
 
-    BlocProvider.of<DetailProgramBloc>(context)
-        .add(OnDetailProgramView(idDataProgram: widget.data.idProgram));
+    BlocProvider.of<DetailProgramBloc>(context).add(OnDetailProgramView(data: widget.data));
+
   }
 
   @override

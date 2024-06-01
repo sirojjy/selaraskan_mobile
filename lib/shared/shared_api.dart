@@ -10,12 +10,12 @@ class ApiConstant {
   static String programKualitasUdara = '$baseUrl/get_evidence_kualitasUdara';
   static String programKualitasAir = '$baseUrl/get_evidence_kualitasAir';
   static String programKebersihan = '$baseUrl/get_evidence_kebersihan';
+  
+  static String baseUrlFile = 'http://123.100.226.123:2904/file_uploads';
 
   ///ADD EVIDENCE
   static String addProgramKebersihan = '$baseUrl/add_evidence_kebersihan';
-
-  ///FILE UPLOADS PROGRAM MANDATORY
-  static String baseUrlFile = 'http://123.100.226.123:2904/file_uploads';
+  static String addSampahDarat = '$baseUrl/add_evidence_sampah_darat';
   static String fileKebersihanPelabuhan = '$baseUrlFile/program_lingkungan';
   static String fileSampah = '$baseUrlFile/penanganan_sampah';
   static String fileKualitasUdara = '$baseUrlFile/kualitas_udara';

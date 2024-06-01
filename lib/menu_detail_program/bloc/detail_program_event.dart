@@ -6,8 +6,7 @@ class DetailProgramEvent extends Equatable {
 }
 
 class OnDetailProgramView extends DetailProgramEvent {
-  final String? idDataProgram;
-  final String? idProgram;
+  final ProgramModel? data;
 
-  OnDetailProgramView({this.idDataProgram, this.idProgram});
+  OnDetailProgramView({this.data});
 }

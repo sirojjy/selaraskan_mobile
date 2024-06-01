@@ -8,6 +8,7 @@ class ValidateDataState extends Equatable {
   final XFile? fileSesudah;
   final String? area;
   final String? keterangan;
+  final String? idDataProgram;
   bool successUpload;
 
   ValidateDataState({
@@ -18,6 +19,7 @@ class ValidateDataState extends Equatable {
     this.fileSesudah,
     this.area,
     this.keterangan,
+    this.idDataProgram,
     this.successUpload = false
   });
 
@@ -30,7 +32,8 @@ class ValidateDataState extends Equatable {
     fileSesudah,
     area,
     keterangan,
-    successUpload
+    idDataProgram,
+    successUpload,
   ];
 
   ValidateDataState copyWith({
@@ -41,6 +44,7 @@ class ValidateDataState extends Equatable {
     XFile? fileSesudah,
     String? area,
     String? keterangan,
+    String? idDataProgram,
     bool? successUpload
   }) {
     return ValidateDataState(
@@ -51,6 +55,7 @@ class ValidateDataState extends Equatable {
       fileSesudah: fileSesudah ?? this.fileSesudah,
       area: area ?? this.area,
       keterangan: keterangan ?? this.keterangan,
+      idDataProgram: idDataProgram ?? this.idDataProgram,
       successUpload: successUpload ?? this.successUpload
     );
   }

@@ -17,10 +17,11 @@ class ChangeImageFileSesudah extends ValidateDataEvent {
 
 class SubmitData extends ValidateDataEvent {}
 
-class SetIdDataProgram extends ValidateDataEvent {
+class SetIdProgram extends ValidateDataEvent {
+  final String? idProgram;
   final String? idDataProgram;
 
-  SetIdDataProgram({this.idDataProgram});
+  SetIdProgram({this.idProgram, this.idDataProgram});
 }
 
 class ChangeArea extends ValidateDataEvent {
