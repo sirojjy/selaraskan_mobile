@@ -9,11 +9,9 @@ class ProgramModel {
   final String? jenisProgram;
   final String? jadwal;
   final double? score;
-  final String? idDataProgram;
 
   ProgramModel(
       {this.idProgram,
-      this.idDataProgram,
       this.iconMap,
       this.namaProgram,
       this.jenisProgram,

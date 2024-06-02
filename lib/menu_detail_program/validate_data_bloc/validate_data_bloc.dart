@@ -19,7 +19,7 @@ class ValidateDataBloc extends Bloc<ValidateDataEvent, ValidateDataState> {
         emit(state.copyWith(file: event.filePickData));
       } else if (event is ChangeImageFileSesudah) {
         emit(state.copyWith(fileSesudah: event.filePickData));
-      } else if (event is SetIdDataProgram) {
+      } else if (event is SetIdProgram) {
         emit(state.copyWith(idProgram: event.idDataProgram));
       } else if (event is ChangeArea) {
         emit(state.copyWith(area: event.value));
@@ -59,7 +59,6 @@ class ValidateDataBloc extends Bloc<ValidateDataEvent, ValidateDataState> {
           request.fields['area'] = '${state.area}';
           request.fields['keterangan'] = '${state.keterangan}';
           request.fields['tanggal'] = '${DateTime.now()}';
-
           request.files.add(await http.MultipartFile.fromPath('file', file.path));
           request.files.add(await http.MultipartFile.fromPath('file_sesudah', fileSesudah.path));
         }else if(state.idProgram == '99'){
