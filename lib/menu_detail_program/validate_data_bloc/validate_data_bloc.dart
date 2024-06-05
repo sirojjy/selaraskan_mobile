@@ -49,27 +49,33 @@ class ValidateDataBloc extends Bloc<ValidateDataEvent, ValidateDataState> {
         }else {
           url = Uri.parse(ApiConstant.addProgramKebersihan);
         }
+        print('ID Data Program : ${state.idDataProgram}');
 
         var request = http.MultipartRequest("POST", url);
-
+        request.fields['id_pelabuhan'] = '$idPelabuhan';
+        request.fields['id_data_program'] = '${state.idDataProgram}';
+        request.fields['area'] = '${state.area}';
+        request.fields['keterangan'] = '${state.keterangan}';
+        request.files.add(await http.MultipartFile.fromPath('file', file.path));
+        request.files.add(await http.MultipartFile.fromPath('file_sesudah', fileSesudah.path));
+        // request.fields['tanggal'] = '${DateTime.now()}';
         /// GAWER KONDISI MENEH NENG KNE
-        if(state.idProgram == '54'){
-          request.fields['id_pelabuhan'] = '$idPelabuhan';
-          request.fields['id_data_program'] = '${state.idDataProgram}';
-          request.fields['area'] = '${state.area}';
-          request.fields['keterangan'] = '${state.keterangan}';
-          request.fields['tanggal'] = '${DateTime.now()}';
-          request.files.add(await http.MultipartFile.fromPath('file', file.path));
-          request.files.add(await http.MultipartFile.fromPath('file_sesudah', fileSesudah.path));
-        }else if(state.idProgram == '99'){
-
-        }
+        // if(state.idProgram == '54'){
+        //   request.fields['id_pelabuhan'] = '$idPelabuhan';
+        //   request.fields['id_data_program'] = '${state.idDataProgram}';
+        //   request.fields['area'] = '${state.area}';
+        //   request.fields['keterangan'] = '${state.keterangan}';
+        //   request.fields['tanggal'] = '${DateTime.now()}';
+        //   request.files.add(await http.MultipartFile.fromPath('file', file.path));
+        //   request.files.add(await http.MultipartFile.fromPath('file_sesudah', fileSesudah.path));
+        // }else if(state.idProgram == '99'){
+        //
+        // }
 
 
         await request.send().then((response) {
-          print(
-              'INI KANN $url ${idPelabuhan} ${state.idDataProgram} ${state.area} ${state.keterangan} ${DateTime.now()}');
-          if (response.statusCode == 200) print("Uploaded! ${response.stream}");
+          print('INI KANN $url ${idPelabuhan} ${state.idDataProgram} ${state.area} ${state.keterangan} ${state.file} ${state.fileSesudah} ${DateTime.now()}');
+          if (response.statusCode == 200) print("Gagal! ${response.stream}");
         });
 
         emit(state.copyWith(successUpload: true));

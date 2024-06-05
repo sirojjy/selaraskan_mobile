@@ -11,6 +11,8 @@ import 'package:selaraskan_mobile/menu_program/bloc/daftar_program_bloc.dart';
 import 'package:selaraskan_mobile/menu_program/daftar_program.dart';
 import 'package:selaraskan_mobile/menu_program/form_daftar_program.dart';
 import 'package:selaraskan_mobile/shared/routes.dart';
+
+import 'menu_hasil/menu_hasil.dart';
 void main () async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -47,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         CustomRoutes.loginPage : (context) => const Login(),
         CustomRoutes.dashboardUPTPage : (context) => const DashboardUPTPage(),
-        CustomRoutes.daftarProgram : (context) => const DaftarProgram(),
+        CustomRoutes.hasilProgram : (context) => const HasilProgram(),
         CustomRoutes.formDaftarProgram : (context) => const FormDaftarProgram(),
       },
     );

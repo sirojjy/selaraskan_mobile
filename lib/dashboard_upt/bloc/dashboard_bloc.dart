@@ -58,7 +58,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       });
 
       var response = jsonDecode(request.body);
-      // print('Dashboard bloc print nama klien ${response['nama']}');
+      // print('Dashboard print ID Pelabuhan ${response['id_pelabuhan']}');
       if (response == null) {
         emit(state.copyWith(
           message: response['error_msg'],

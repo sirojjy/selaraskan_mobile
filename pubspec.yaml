@@ -48,6 +48,25 @@ dependencies:
   equatable: ^2.0.5
   intl: ^0.19.0
   sliding_clipped_nav_bar: ^3.1.1
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo/logo_kkp_oval.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/logo/logo_kkp_oval.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/logo/logo_kkp_oval.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/logo/logo_kkp_oval.png"
 
 
 dev_dependencies:

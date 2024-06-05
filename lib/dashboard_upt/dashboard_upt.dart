@@ -7,6 +7,7 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:selaraskan_mobile/dashboard_upt/component/chart_air.dart';
 import 'package:selaraskan_mobile/dashboard_upt/component/chart_listrik.dart';
 import 'package:selaraskan_mobile/dashboard_upt/component/comp_sampah_laut.dart';
+import 'package:selaraskan_mobile/menu_hasil/menu_hasil.dart';
 import 'package:selaraskan_mobile/menu_program/daftar_program.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -304,8 +305,8 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
                     : state.indexMenu == 1
                         ? const DaftarProgram()
                         : state.indexMenu == 2
-                            ? const DaftarProgram()
-                            : const DaftarProgram(),
+                            ? const HasilProgram()
+                            : const HasilProgram(),
               ),
             ),
           ),

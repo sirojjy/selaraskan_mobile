@@ -47,7 +47,7 @@ class _BottomMenuState extends State<BottomMenu> {
         ),
         BarItem(
           icon: Icons.person,
-          title: 'Galeri',
+          title: 'Profil',
           activeColor: Colors.blue,
           inactiveColor: Colors.grey[600],
         ),

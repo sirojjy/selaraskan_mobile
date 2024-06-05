@@ -68,7 +68,7 @@ class _LoginState extends State<Login> {
                   child: TextFormField(
                     controller: userNameController,
                     decoration: InputDecoration(
-                      hintText: 'ppn_palabuhanratu',
+                      hintText: 'username',
                       // hintText: 'Username',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(40.0)),
@@ -146,6 +146,8 @@ class _LoginState extends State<Login> {
                                 // password: passwordController.text = 'ditkp2022',
                                 username: userNameController.text ='pp_tenau',
                                 password: passwordController.text = 'selaraskan123',
+                                // username: userNameController.text,
+                                // password: passwordController.text,
                                 // username: userNameController.text ='ppn_palabuhanratu',
                                 // password: passwordController.text = 'ditkp2022',
                               ))
