@@ -75,6 +75,13 @@ class _DashboardUPTPageState extends State<DashboardUPTPage> {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
         print('Id pelabuhan : ${pref?.getString('id_pelabuhan')}');
+
+        /// Menampilkan layar pemuatan saat data belum siap
+        if (state.status == DashboardStateStatus.loading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         return SafeArea(
           child: Scaffold(
             bottomNavigationBar: const BottomMenu(),

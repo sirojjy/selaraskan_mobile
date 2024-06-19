@@ -8,50 +8,60 @@ class ValidateDataState extends Equatable {
   final XFile? fileSesudah;
   final String? area;
   final String? keterangan;
+  final String? areaString;
+
+  ///Volume Sampah Darat
+  final String? sampahDarat;
+
   bool successUpload;
 
-  ValidateDataState({
-    this.idPelabuhan,
-    this.idProgram,
-    this.idDataProgram,
-    this.file,
-    this.fileSesudah,
-    this.area,
-    this.keterangan,
-    this.successUpload = false
-  });
+  ValidateDataState(
+      {this.idPelabuhan,
+      this.idProgram,
+      this.idDataProgram,
+      this.file,
+      this.fileSesudah,
+      this.area,
+      this.keterangan,
+      this.sampahDarat,
+      this.areaString,
+      this.successUpload = false});
 
   @override
   List<Object?> get props => [
-    idPelabuhan,
-    idProgram,
-    idDataProgram,
-    file,
-    fileSesudah,
-    area,
-    keterangan,
-    successUpload,
-  ];
+        idPelabuhan,
+        idProgram,
+        idDataProgram,
+        file,
+        fileSesudah,
+        area,
+        keterangan,
+        sampahDarat,
+        areaString,
+        successUpload,
+      ];
 
-  ValidateDataState copyWith({
-    String? idPelabuhan,
-    String? idProgram,
-    String? idDataProgram,
-    XFile? file,
-    XFile? fileSesudah,
-    String? area,
-    String? keterangan,
-    bool? successUpload
-  }) {
+  ValidateDataState copyWith(
+      {String? idPelabuhan,
+      String? idProgram,
+      String? idDataProgram,
+      XFile? file,
+      XFile? fileSesudah,
+      String? area,
+      String? keterangan,
+      String? sampahDarat,
+      String? areaString,
+      bool? successUpload}) {
     return ValidateDataState(
-      idPelabuhan: idPelabuhan ?? this.idPelabuhan,
-      idProgram: idProgram ?? this.idProgram,
-      idDataProgram: idProgram ?? this.idDataProgram,
-      file: file ?? this.file,
-      fileSesudah: fileSesudah ?? this.fileSesudah,
-      area: area ?? this.area,
-      keterangan: keterangan ?? this.keterangan,
-      successUpload: successUpload ?? this.successUpload
-    );
+        idPelabuhan: idPelabuhan ?? this.idPelabuhan,
+        idProgram: idProgram ?? this.idProgram,
+        idDataProgram: idProgram ?? this.idDataProgram,
+        file: file ?? this.file,
+        fileSesudah: fileSesudah ?? this.fileSesudah,
+        area: area ?? this.area,
+        keterangan: keterangan ?? this.keterangan,
+        sampahDarat: sampahDarat ?? this.sampahDarat,
+        areaString: areaString ?? this.areaString,
+        successUpload: successUpload ?? this.successUpload);
   }
 }

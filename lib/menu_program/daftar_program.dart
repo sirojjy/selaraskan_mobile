@@ -131,7 +131,8 @@ class _DaftarProgramState extends State<DaftarProgram> {
                               child: Text(
                                 '${state.dataProgram[index].namaProgram}',
                                 style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xfff3478DF)),
-                                overflow: TextOverflow.ellipsis,
+                                overflow: TextOverflow.visible,
+                                maxLines: 2,
                                 softWrap: true,
                               ),
                             ),

@@ -32,25 +32,23 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
       // }
 
       if(event.data?.idProgram == '4'){ /// Himbauan hemat energi dan air
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programHematEnergiAir);
       }else if(event.data?.idProgram == '5'){ /// Patroli energi dan air
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programPatroliEnergiAir);
       }else if(event.data?.idProgram == '7'){ ///  Himbauan K3
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programHimbauanK3);
       }else if(event.data?.idProgram == '9'){ /// Patroli K3
-        url = Uri.parse(ApiConstant.programSampah);
-      }else if(event.data?.idProgram == '11'){ /// Pembuatan sumur resapan/ biopori
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programPatroliK3);
       }else if(event.data?.idProgram == '15'){ /// Upaya penambahan/pemeliharaan RTH di pelabuhan perikanan
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programPemeliharaanRTH);
       }else if(event.data?.idProgram == '43'){ /// Penggunaan lampu hemat energi
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programLampuHematEnergi);
       }else if(event.data?.idProgram == '47'){ /// Pengukuran kualitas udara
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programKualitasUdara);
       }else if(event.data?.idProgram == '48'){ /// Pengukuran kualitas air kolam pelabuhan
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programKualitasAir);
       }else if(event.data?.idProgram == '49'){ /// Pengukuran air limbah pelabuhan
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programLimbahIPAL);
       }else if(event.data?.idProgram == '51'){ /// Pengukuran volume sampah darat
         url = Uri.parse(ApiConstant.programSampah);
       }else if(event.data?.idProgram == '52'){ /// Pengukuran volume sampah laut
@@ -60,18 +58,18 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
       }else if(event.data?.idProgram == '54'){ /// Kebersihan area pelabuhan
         url = Uri.parse(ApiConstant.programKebersihan);
       }else if(event.data?.idProgram == '58'){ /// Penyediaan penampungan limbah B3
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programLimbahB3);
       }else if(event.data?.idProgram == '60'){ /// Penilaian kepatuhan tenan
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programKepatuhanTenan);
       }else if(event.data?.idProgram == '61'){ /// Pengangkutan/pendistribusian Sampah
         url = Uri.parse(ApiConstant.programSampah);
       }else if(event.data?.idProgram == '64'){ /// Pelaksanaan sertifikasi dan surveillance ISO 14001
-        url = Uri.parse(ApiConstant.programSampah);
+        url = Uri.parse(ApiConstant.programSertifikasiISO);
       }else if(event.data?.idProgram == '99'){ /// Pengolahan sampah
         url = Uri.parse(ApiConstant.programSampah);
       }else if(event.data?.idProgram == '100'){ /// Upload drone bulanan
+        url = Uri.parse(ApiConstant.programUploadDrone);
         /// VOLUNTARY
-        url = Uri.parse(ApiConstant.programSampah);
       }else if(event.data?.idProgram == '8'){ ///  Membuat penampungan air hujan
         url = Uri.parse(ApiConstant.programSampah);
       }else if(event.data?.idProgram == '45'){ /// Penggunaan energi baru terbarukan
@@ -112,7 +110,7 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
 
 
       print('Mengirim permintaan ke URL: $url dengan id_pelabuhan: $idPelabuhan id_program: ${event.data?.idProgram} id_data_program ${event.data?.idDataProgram}');
-
+      await prefs.setString('id_program', event.data?.idProgram ?? '');
       var response = await http.post(
         url,
         body: {
@@ -139,15 +137,22 @@ class DetailProgramBloc extends Bloc<DetailProgramEvent, DetailProgramState> {
                 tanggal: jsonResponse['data'][i]['tanggal'],
                 fileSesudah: jsonResponse['data'][i]['foto_sesudah'],
                 idProgram: jsonResponse['data'][i]['id_program'],
+                area: jsonResponse['data'][i]['area'],
+                indikator: jsonResponse['indikator'],
+                // area: jsonResponse['data'][i]['area'],
+            ));
                 // idDataProgram: jsonResponse['data'][i]['id_data_program'],
-                area: jsonResponse['data'][i]['area']));
           }
         }
 
         emit(state.copyWith(
             status: DetailProgramStateStatus.success, listProgram: listData));
       } else {
-        throw Exception('Gagal memuat data: ${response.statusCode}');
+        if (response.statusCode == 404) {
+          print('Data Kosong');
+          throw Exception('Data Kosong');
+        }
+
       }
     } catch (error) {
       print('Kesalahan detail program bloc: $error');
