@@ -52,4 +52,50 @@ class ChangeAreaString extends ValidateDataEvent {
 
   ChangeAreaString({this.value});
 }
+class ChangeData1 extends ValidateDataEvent {
+  final String? value;
 
+  ChangeData1({this.value});
+}
+
+class ChangeData2 extends ValidateDataEvent {
+  final String? value;
+
+  ChangeData2({this.value});
+}
+
+class ChangeData3 extends ValidateDataEvent {
+  final String? value;
+
+  ChangeData3({this.value});
+}
+
+class ChangeData4 extends ValidateDataEvent {
+  final String? value;
+
+  ChangeData4({this.value});
+}
+
+class ChangeData5 extends ValidateDataEvent {
+  final String? value;
+
+  ChangeData5({this.value});
+}
+
+class ChangeData6 extends ValidateDataEvent {
+  final String? value;
+
+  ChangeData6({this.value});
+}
+
+class ChangeData7 extends ValidateDataEvent {
+  final String? value;
+
+  ChangeData7({this.value});
+}
+
+class ChangeData8 extends ValidateDataEvent {
+  final String? value;
+
+  ChangeData8({this.value});
+}
