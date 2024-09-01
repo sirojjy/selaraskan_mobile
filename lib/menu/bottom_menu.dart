@@ -45,12 +45,12 @@ class _BottomMenuState extends State<BottomMenu> {
           activeColor: Colors.blue,
           inactiveColor: Colors.grey[600],
         ),
-        BarItem(
-          icon: Icons.person,
-          title: 'Profil',
-          activeColor: Colors.blue,
-          inactiveColor: Colors.grey[600],
-        ),
+        // BarItem(
+        //   icon: Icons.person,
+        //   title: 'Profil',
+        //   activeColor: Colors.blue,
+        //   inactiveColor: Colors.grey[600],
+        // ),
       ],
     );
   }

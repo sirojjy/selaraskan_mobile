@@ -23,25 +23,26 @@ class ValidateDataState extends Equatable {
 
   bool successUpload;
 
-  ValidateDataState(
-      {this.idPelabuhan,
-      this.idProgram,
-      this.idDataProgram,
-      this.file,
-      this.fileSesudah,
-      this.area,
-      this.keterangan,
-      this.sampahDarat,
-      this.areaString,
-      this.data1,
-      this.data2,
-      this.data3,
-      this.data4,
-      this.data5,
-      this.data6,
-      this.data7,
-      this.data8,
-      this.successUpload = false});
+  ValidateDataState({
+    this.idPelabuhan,
+    this.idProgram,
+    this.idDataProgram,
+    this.file,
+    this.fileSesudah,
+    this.area,
+    this.keterangan,
+    this.sampahDarat,
+    this.areaString,
+    this.data1,
+    this.data2,
+    this.data3,
+    this.data4,
+    this.data5,
+    this.data6,
+    this.data7,
+    this.data8,
+    this.successUpload = false
+  });
 
   @override
   List<Object?> get props => [

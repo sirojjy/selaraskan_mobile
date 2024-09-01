@@ -26,8 +26,10 @@ class _HasilProgramState extends State<HasilProgram> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Under Construction'),
+    return const Center(
+      // padding: EdgeInsets.all(10),
+      child: Padding(padding: EdgeInsets.all(20),
+      child: Text('Silahkan akses web Selaraskan'),),
     );
     //   BlocBuilder<DaftarProgramBloc, DaftarProgramState>(
     //   builder: (context, state){
